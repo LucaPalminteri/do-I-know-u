@@ -17,7 +17,7 @@ export default function Home() {
         <JoinGame/>
       </h2>
       <h2>
-        <Link href={'/'}>¿Cómo se juega?</Link>
+        <Link href={'/information'}>¿Cómo se juega?</Link>
       </h2>
     </main>
   )

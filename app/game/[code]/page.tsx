@@ -9,7 +9,7 @@ function Code({params}:{params:Params}) {
     <div>
         <Link href={'/'}>Inicio</Link>
         <h3>
-            page: {params.code}
+            code ==== {params.code}
         </h3> 
     </div>
   )

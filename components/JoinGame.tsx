@@ -23,6 +23,7 @@ export default function JoinGame() {
 
     const handleClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
+        if (value.length < 6) return;
         router.push(`/game/${value}`)
       }
 
