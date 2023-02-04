@@ -6,17 +6,13 @@ export default async function joinGame(
   res: NextApiResponse<Object | null>
 ) {
 
-    let code = req.body
+    let {data:code} = req.body
 
     try {
-        const { data, error} = await supabase.from('games').select()
+        const { data, error} = await supabase.from('games').select().eq('code',`${code}`)
         res.status(200).json(data)
     } catch (error) {
-        res.status(200).json({ data: 'error' })
-
+        res.status(500).json({ data: 'error' })
     }
-
-    res.status(200).json({ data: 'join existing game' })
-
 
 }

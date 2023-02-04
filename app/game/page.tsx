@@ -12,8 +12,8 @@ function Game()
     <div>
         <Link href={'/'}>Volver</Link>
         <h1>Te Conozco</h1>
-        <h3>Codigo: {code}</h3>
-        <NewGameButton code={code}/>
+        <NewGameButton />
+        <h2>Some basic info about the game</h2>
     </div>
   )
 }
