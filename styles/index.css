@@ -1,1 +1,7 @@
-/*# sourceMappingURL=index.css.map */
+html, body {
+  text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
+}/*# sourceMappingURL=index.css.map */
