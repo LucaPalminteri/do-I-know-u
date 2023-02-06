@@ -4,3 +4,10 @@ export type game = {
     players_count:number,
     code:string
 }
+
+export type player_game = {
+    id:string,
+    game:string,
+    username:string,
+    created_at:string
+}
