@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loader = ({ show }) => {
+const Loader = ({ show }:{show:boolean}) => {
   return (
     <div className={`loader-container ${show ? 'active' : ''}`}>
       <div className="loader-overlay" />

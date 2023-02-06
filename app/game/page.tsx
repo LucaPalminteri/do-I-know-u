@@ -2,11 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 import NewGameButton from '@/components/NewGameButton'
 
-import { getRandomCode } from '@/utils/Functions'
-
 function Game() 
 {
-  let code = getRandomCode()
 
   return (
     <div>

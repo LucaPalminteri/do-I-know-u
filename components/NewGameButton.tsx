@@ -10,20 +10,36 @@ function NewGameButton() {
   let router = useRouter()
 
   const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState('');
 
   
   async function startGame() {
+    if (username.length == 0) return;
+
     setIsLoading(true)
-    let {data} = await axios.get('/api/create-new-game')
+    let {data} = await axios.get('/api/create-new-game',{params: {username}})
     router.push(`/game/${data}`)
   }
+
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
 
   return (
     <>
       {isLoading && <Loader show={true} />}
-      <button
-      onClick={startGame}
-      >Iniciar</button>
+        <label htmlFor="">Nombre:</label>
+        <input 
+         type="text" 
+         required
+         value={username}
+         onChange={handleChange}
+         maxLength={30}
+        />
+        <button
+        onClick={startGame}
+        >Iniciar</button>
+        <p>{username}</p>
     </>
   )
 }

@@ -4,7 +4,9 @@ import JoinGame from '@/components/JoinGame'
 export default function Home() {
   return (
     <main>
-      <h1>te conozco</h1>
+      <header>
+        <h1>Te conozco?</h1>
+      </header>
 
       <h2>
         <Link href={'/game'}>Nuevo juego</Link>
