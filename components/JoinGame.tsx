@@ -68,6 +68,8 @@ export default function JoinGame() {
             return;
         }
 
+        localStorage.setItem('username',username)
+
         router.push(`/game/${code}`)
       }
 

@@ -16,17 +16,18 @@ export default async function createNewGame(
   try {
     let games_response = await supabase.from('games').insert({code}).select()
 
-    if (games_response != null) {
-      game = games_response.data[0]
-    }
+    if (games_response.data == null) return;
 
+    if (games_response != null) 
+      game = games_response.data[0]
+    
     let players_games_response = await supabase.from('players_games').insert({game:game?.id,username}).select()
 
-    if (players_games_response != null) {
+    if (players_games_response != null) 
       player_game = players_games_response.data[0]
-    }
+    
 
-    res.status(200).json(game?.code)
+    res.status(200).json(game.code)
   } catch (error) {
     res.status(200).json({ data: 'error' })
   }
