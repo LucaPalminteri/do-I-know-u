@@ -1,4 +1,6 @@
 html,body {
+    margin: 0;
+    padding: 0;
     text-align: center;
     background-color: #111;
     color: #EEE;
@@ -6,4 +8,80 @@ html,body {
 
 button:hover {
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #EEE;
+    transition-duration: .2s;
+
+    &:hover {
+        color: lightgreen;
+    }
+
+    
+}
+
+main  {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    header {
+    background-color: #333;
+    width: 100%;
+
+        h1 {
+            margin: 0;
+            padding: 20px;
+        }
+    }
+
+    h2 {
+        background-color: #444;
+        margin: 30px 0;
+        padding: 30px;
+        border-radius: 8px;
+        transition-duration: .2s;
+
+        .join-game {
+
+            h3 {
+                margin: 5px;
+            }
+
+            input {
+                font-size: 24px;
+                margin: 20px;
+                border: none;
+                border-radius: 8px;
+                padding: 5px;
+                width: 130px;
+                text-align: center;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            button {
+                margin: 10px;
+                padding: 10px;
+                border-radius: 8px;
+                border: none;
+            }
+        }
+
+        &:hover {
+            color: lightgreen;
+            transform: scale(1.05);
+            background-color: #666;
+        }
+
+        &:focus {
+            transform: scale(0.7);
+        }
+    }
 }
