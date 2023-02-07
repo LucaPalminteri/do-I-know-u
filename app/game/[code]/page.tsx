@@ -3,8 +3,10 @@ import Link from 'next/link'
 import React, { use } from 'react'
 import ShareButton from '@/components/ShareButton'
 import supabase from '@/utils/supabase'
-import { game, player_game } from '@/types/games'
+import { player_game } from '@/types/games'
 import LeaveGameButton from '@/components/LeaveGameButton'
+import { cookies } from 'next/headers';
+import jwt from "jsonwebtoken"; 
 
 async function getInfo(code:string) {
   try {
@@ -18,6 +20,12 @@ async function getInfo(code:string) {
 
 
 function Code({params}:{params:Params}) {
+    const nextCookies = cookies();
+    const cookie = nextCookies.get('token');
+
+    let {username} = jwt.verify(cookie?.value, process.env.NEXT_PUBLIC_TOKEN_NAME);
+
+    console.log(username);
 
     let code:string = params.code
 
@@ -28,7 +36,7 @@ function Code({params}:{params:Params}) {
   return (
     <div>
       <Link href={'/'}>Inicio</Link>
-      
+      <p>Usted: {username}</p>
       <h3>Participantes: {res?.players_count} en total</h3>
       <ol>
         {arrUsers}
