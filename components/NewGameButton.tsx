@@ -18,6 +18,7 @@ function NewGameButton() {
 
     setIsLoading(true)
     let {data} = await axios.get('/api/create-new-game',{params: {username}})
+    localStorage.setItem('username',username)
     router.push(`/game/${data}`)
   }
 
