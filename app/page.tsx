@@ -3,20 +3,20 @@ import JoinGame from '@/components/JoinGame'
 
 export default function Home() {
   return (
-    <main>
+    <main className='root'>
       <header>
         <h1>Te conozco?</h1>
       </header>
 
-      <h2>
+      <div className='option'>
         <Link href={'/game'}>Nuevo juego</Link>
-      </h2>
-      <h2>
+      </div>
+      <div className='option'>
         <JoinGame/>
-      </h2>
-      <h2>
+      </div>
+      <div className='option'>
         <Link href={'/information'}>¿Cómo se juega?</Link>
-      </h2>
+      </div>
     </main>
   )
 }

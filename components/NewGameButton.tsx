@@ -14,7 +14,7 @@ function NewGameButton() {
 
   
   async function startGame() {
-    if (username.length == 0) return;
+    if (username.length < 4) return;
 
     setIsLoading(true)
     let {data} = await axios.get('/api/create-new-game',{params: {username}})
@@ -27,7 +27,7 @@ function NewGameButton() {
   };
 
   return (
-    <>
+    <div className='new-game'>
       {isLoading && <Loader show={true} />}
         <label htmlFor="">Nombre:</label>
         <input 
@@ -40,8 +40,7 @@ function NewGameButton() {
         <button
         onClick={startGame}
         >Iniciar</button>
-        <p>{username}</p>
-    </>
+    </div>
   )
 }
 

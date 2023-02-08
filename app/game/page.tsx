@@ -6,8 +6,10 @@ function Game()
 {
 
   return (
-    <div>
+    <div className='game'>
+      <header>
         <Link href={'/'}>Volver</Link>
+      </header>
         <h1>Te Conozco</h1>
         <NewGameButton />
         <h2>Some basic info about the game</h2>
