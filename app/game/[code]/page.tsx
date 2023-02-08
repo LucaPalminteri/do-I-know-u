@@ -7,6 +7,8 @@ import { player_game } from "@/types/games";
 import LeaveGameButton from "@/components/LeaveGameButton";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import WebcamComponent from "@/components/Webcam";
+
 
 async function getInfo(code: string) {
     try {
@@ -20,6 +22,8 @@ async function getInfo(code: string) {
 }
 
 function Code({ params }: { params: Params }) {
+    
+
     const nextCookies = cookies();
     const cookie = nextCookies.get("token");
 
@@ -51,6 +55,7 @@ function Code({ params }: { params: Params }) {
 
             <main>
                 {res?.players_count >= 3 && <button>Empezar</button>}
+                {false && <WebcamComponent/>}
             </main>
 
             <div className="code">
