@@ -1,0 +1,50 @@
+.root  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    header {
+    background-color: $secondary-dark-color;
+    width: 100%;
+
+        h1 {
+            padding: 20px;
+        }
+    }
+
+    .option {
+        background-color: #444;
+        margin: 30px 0;
+        padding: 30px;
+        border-radius: $border-radius;
+        transition-duration: .2s;
+
+        .join-game {
+
+            h3 {
+                margin: 5px;
+            }
+
+            input {
+                font-size: 24px;
+                margin: 20px;
+                width: 130px;
+                text-align: center;
+            }
+
+            button {
+                margin: 10px;
+            }
+        }
+
+        &:hover {
+            color: lightgreen;
+            background-color: #666;
+        }
+
+        &:focus {
+            transform: scale(0.7);
+        }
+    }
+}

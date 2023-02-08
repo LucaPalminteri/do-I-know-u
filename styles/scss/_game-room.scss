@@ -1,0 +1,30 @@
+.game-room {
+
+    main {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .inicio-link {
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+
+    .players {
+        background-color: $secondary-dark-color;
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
+
+    .code {
+        background-color: $secondary-dark-color;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+}

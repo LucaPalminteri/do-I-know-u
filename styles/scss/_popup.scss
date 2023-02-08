@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .popup-container {
     position: fixed;
     top: 0;
@@ -21,7 +23,7 @@
   .popup-box {
     background-color: #444;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: $border-radius;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     z-index: 10;
   }
@@ -29,7 +31,7 @@
   button.popup-close {
     background-color: #ddd;
     border: 1px solid #999;
-    border-radius: 10px;
+    border-radius: $border-radius;
     padding: 5px 10px;
     margin-top: 10px;
     cursor: pointer;
