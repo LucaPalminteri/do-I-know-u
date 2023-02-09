@@ -10,7 +10,7 @@ export default async function createNewGame(
     let code: string = getRandomCode();
     let username: string = req.query.username;
 
-    let serialized = createToken(username)
+    let serialized = createToken(username,code)
     res.setHeader("Set-Cookie", serialized);
 
     try {

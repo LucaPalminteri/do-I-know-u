@@ -4,12 +4,11 @@ import React from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
-function LeaveGameButton({code}:{code:string}) {
+function LeaveGameButton({code,username}:{code:string,username: string}) {
 
     let route = useRouter()
 
     async function handleClick() {
-        let username = localStorage.getItem('username')
 
         await axios.post('/api/leave-game',{code,username})
         route.push('/')

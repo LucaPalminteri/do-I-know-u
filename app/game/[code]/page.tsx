@@ -25,14 +25,12 @@ function Code({ params }: { params: Params }) {
     
 
     const nextCookies = cookies();
-    const cookie = nextCookies.get("token");
+    const cookie = nextCookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!);
 
     let { username } = jwt.verify(
         cookie?.value,
         process.env.NEXT_PUBLIC_TOKEN_NAME
     );
-
-    console.log(username);
 
     let code: string = params.code;
 
@@ -61,7 +59,7 @@ function Code({ params }: { params: Params }) {
             <div className="code">
                 <h3>code ==== {code}</h3>
                 <ShareButton code={code} />
-                <LeaveGameButton code={code} />
+                <LeaveGameButton code={code} username={username}/>
             </div>
         </div>
     );

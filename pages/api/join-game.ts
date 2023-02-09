@@ -14,8 +14,12 @@ export default async function joinGame(
 
     let { code, username } = req.body;
 
-    let serialized = createToken(username)
-    res.setHeader("Set-Cookie", serialized);
+    
+
+    if(req.headers.cookie == undefined) {
+        let serialized = createToken(username,code)
+        res.setHeader("Set-Cookie", serialized);
+    }
 
     try {
         let { data, error } = await supabase
@@ -34,8 +38,6 @@ export default async function joinGame(
         let isNameInUse: number = usernames.filter(
             (name: string): boolean => name == username
         ).length 
-
-        console.log(isNameInUse);
 
         let isUserInGame: boolean = usernames.some(
             (name: string): boolean => name == username

@@ -5,9 +5,14 @@ import React, { useState } from "react";
 import axios from 'axios';
 import PopUp from './PopUpMessage';
 import Loader from './Loader';
+import Link from 'next/link';
+import Cookies from 'js-cookie'
 
 export default function JoinGame() {
 
+    let cookies = Cookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!)
+
+    console.log(cookies);
     const [code, setCode] = useState('');
 
     const [showPopUp, setShowPopUp] = useState(false);
@@ -68,8 +73,6 @@ export default function JoinGame() {
             return;
         }
 
-        localStorage.setItem('username',username)
-
         router.push(`/game/${code}`)
       }
 
@@ -77,6 +80,8 @@ export default function JoinGame() {
         <div  className='join-game'>
             {showPopUp && <PopUp message={message} code={code} closePopUp={closePopUp} />}
             {isLoading && <Loader show={true} />}
+
+            {}
 
             <h3>Unirme a una partida</h3>
             <label htmlFor="">Nombre:</label>
