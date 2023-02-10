@@ -1,20 +1,67 @@
+@keyframes show {
+    0% {
+        width: 0;
+        height: 0;
+        outline: 8px solid #ffd700;
+    }
+
+    100% {
+        width: 100%;
+        height: 100%;
+        outline: 4px solid #ffd700;
+    }
+}
+
+@keyframes show-title {
+    0% {
+        font-size: 0;
+        opacity: 1;
+    }
+    90% {
+
+        opacity: .5;
+    }
+
+    100% {
+        font-size: 8vw;
+    }
+}
+
 .game-room {
     display: flex;
     width: 100vw;
     height: 100vh;
-
+    
     main {
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        
+        .do-i-knou-you {
+            animation-name: show;
+            animation-duration: 3s;
+            animation-timing-function: cubic-bezier(.28,.68,.83,0);
+            //animation-timing-function: ease-in;
+
+            h1 {
+                animation-name: show-title;
+            animation-duration: 3s;
+            animation-timing-function: cubic-bezier(.28,.68,.83,0);
+            opacity: 0;
+            
+            }
+            
+        }
+        
     }
 
     aside {
         min-width: 14%;
-        border: 2px solid yellow;
+        border: 3px solid #ffd700;
         position: relative;
+        left: 0;
 
 
         .inicio-link {
@@ -22,23 +69,27 @@
         }
 
         .players {
-            outline: 2px solid yellow;
+            outline: 3px solid #ffd700;
             padding: 20px 0;
 
             ol {
-                padding-left: 20px;
+                padding: 0 20px;
 
                 li {
                     list-style: none;
                     display: flex;
                     align-items: center;
                     margin: 10px 0;
+
+                    p {
+                        margin-left: 10px;
+                    }
                 }
             }
         }
 
         .code {
-            outline: 2px solid yellow;
+            outline: 3px solid yellow;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -51,7 +102,7 @@
 
             button {
                 margin: 10px 0;
-                width: 60%;
+                width: 70%;
                 display: flex;
                 align-items: center;
             }

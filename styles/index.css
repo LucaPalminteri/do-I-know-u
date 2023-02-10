@@ -203,6 +203,30 @@ button.popup-close:hover {
   transform: scale(0.7);
 }
 
+@keyframes show {
+  0% {
+    width: 0;
+    height: 0;
+    outline: 8px solid #ffd700;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    outline: 4px solid #ffd700;
+  }
+}
+@keyframes show-title {
+  0% {
+    font-size: 0;
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    font-size: 8vw;
+  }
+}
 .game-room {
   display: flex;
   width: 100vw;
@@ -215,20 +239,32 @@ button.popup-close:hover {
   justify-content: center;
   align-items: center;
 }
+.game-room main .do-i-knou-you {
+  animation-name: show;
+  animation-duration: 3s;
+  animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
+}
+.game-room main .do-i-knou-you h1 {
+  animation-name: show-title;
+  animation-duration: 3s;
+  animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
+  opacity: 0;
+}
 .game-room aside {
   min-width: 14%;
-  border: 2px solid yellow;
+  border: 3px solid #ffd700;
   position: relative;
+  left: 0;
 }
 .game-room aside .inicio-link {
   padding: 20px 0;
 }
 .game-room aside .players {
-  outline: 2px solid yellow;
+  outline: 3px solid #ffd700;
   padding: 20px 0;
 }
 .game-room aside .players ol {
-  padding-left: 20px;
+  padding: 0 20px;
 }
 .game-room aside .players ol li {
   list-style: none;
@@ -236,8 +272,11 @@ button.popup-close:hover {
   align-items: center;
   margin: 10px 0;
 }
+.game-room aside .players ol li p {
+  margin-left: 10px;
+}
 .game-room aside .code {
-  outline: 2px solid yellow;
+  outline: 3px solid yellow;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -250,7 +289,7 @@ button.popup-close:hover {
 }
 .game-room aside .code button {
   margin: 10px 0;
-  width: 60%;
+  width: 70%;
   display: flex;
   align-items: center;
 }
