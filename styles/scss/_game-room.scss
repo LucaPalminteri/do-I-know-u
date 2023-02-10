@@ -25,13 +25,20 @@
             outline: 2px solid yellow;
             padding: 20px 0;
 
-            ol li {
-                list-style: none;
+            ol {
+                padding-left: 20px;
+
+                li {
+                    list-style: none;
+                    display: flex;
+                    align-items: center;
+                    margin: 10px 0;
+                }
             }
         }
 
         .code {
-            outline: 2px solid red;
+            outline: 2px solid yellow;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -45,6 +52,8 @@
             button {
                 margin: 10px 0;
                 width: 60%;
+                display: flex;
+                align-items: center;
             }
         }
     }
