@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import ShareIcon from '@mui/icons-material/Share';
 
 function ShareButton({ code }: { code: string }) {
     const shareData = {
@@ -16,7 +17,7 @@ function ShareButton({ code }: { code: string }) {
         }
     };
 
-    return <button onClick={shareHandler}>Compartir codigo</button>;
+    return <button onClick={shareHandler} style={{display:'flex',alignItems:'center'}}><ShareIcon style={{marginRight: 10}}/>Compartir codigo</button>;
 }
 
 export default ShareButton;

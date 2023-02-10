@@ -1,4 +1,5 @@
 'use client'
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import React from 'react'
 import axios from 'axios'
@@ -14,7 +15,7 @@ function LeaveGameButton({code,username}:{code:string,username: string}) {
         route.push('/')
     }
   return (
-    <button onClick={handleClick}>Abandonar partida</button>
+    <button onClick={handleClick} style={{display:'flex',alignItems:'center'}}><LogoutIcon style={{marginRight: 10}}/>Abandonar partida</button>
   )
 }
 

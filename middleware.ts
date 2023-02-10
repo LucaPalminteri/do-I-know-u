@@ -11,6 +11,8 @@ export async function middleware(request: NextRequest) {
   try {
     const { data, error} = await supabase.from('games').select().eq('code',`${code}`)
 
+    //TODO: validar si se conectan a una sala que este llena
+
     // si se ingresa un codigo por URL que no existe en la base de datos lo redirige al inicio
     if (data?.length == 0) {
       return NextResponse.redirect(new URL('/', request.url))

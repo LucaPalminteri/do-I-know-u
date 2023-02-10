@@ -14,7 +14,7 @@ export default async function joinGame(
 
     let { code, username } = req.body;
 
-    
+
 
     if(req.headers.cookie == undefined) {
         let serialized = createToken(username,code)

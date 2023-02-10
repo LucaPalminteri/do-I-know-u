@@ -2,8 +2,10 @@ import Link from 'next/link'
 import JoinGame from '@/components/JoinGame'
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import NewGameButton from '@/components/NewGameButton';
 
 export default function Home() {
+  // TODO: Fix button if continue or join
 
   const nextCookies = cookies();
   const cookie = nextCookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!);
@@ -28,7 +30,8 @@ export default function Home() {
       </header>
 
       <div className='option'>
-        <Link href={'/game'}>Nuevo juego</Link>
+        <h2>Nuevo Juego</h2>
+        <NewGameButton/>
       </div>
       <div className='option'>
         { hasCookie ? <Link href={`/game/${playerCode}`}>Continuar juego</Link> : <JoinGame/>}
