@@ -17,7 +17,7 @@ function ShareButton({ code }: { code: string }) {
         }
     };
 
-    return <button onClick={shareHandler} style={{display:'flex',alignItems:'center'}}><ShareIcon style={{marginRight: 10}}/>Compartir codigo</button>;
+    return <button onClick={shareHandler}><ShareIcon style={{marginRight: 10}}/>Compartir partida</button>;
 }
 
 export default ShareButton;

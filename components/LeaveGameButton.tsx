@@ -15,7 +15,7 @@ function LeaveGameButton({code,username}:{code:string,username: string}) {
         route.push('/')
     }
   return (
-    <button onClick={handleClick} style={{display:'flex',alignItems:'center'}}><LogoutIcon style={{marginRight: 10}}/>Abandonar partida</button>
+    <button onClick={handleClick}><LogoutIcon style={{marginRight: 10}}/>Abandonar partida</button>
   )
 }
 
