@@ -1,30 +1,51 @@
 .game-room {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
 
     main {
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .inicio-link {
-        position: fixed;
-        left: 0;
-        top: 0;
-    }
+    aside {
+        min-width: 14%;
+        border: 2px solid yellow;
+        position: relative;
 
-    .players {
-        background-color: $secondary-dark-color;
-        position: fixed;
-        top: 0;
-        right: 0;
-    }
 
-    .code {
-        background-color: $secondary-dark-color;
-        position: fixed;
-        bottom: 0;
-        left: 0;
+        .inicio-link {
+            padding: 20px 0;
+        }
+
+        .players {
+            outline: 2px solid yellow;
+            padding: 20px 0;
+
+            ol li {
+                list-style: none;
+            }
+        }
+
+        .code {
+            outline: 2px solid red;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            button {
+                margin: 10px 0;
+                width: 60%;
+            }
+        }
     }
 }

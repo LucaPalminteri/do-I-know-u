@@ -20,6 +20,7 @@ button {
     &:hover {
         cursor: pointer;
         background-color: $secondary-dark-color;
+        color: $main-text-color;
     }
 }
 
