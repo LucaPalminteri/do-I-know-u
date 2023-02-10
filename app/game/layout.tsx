@@ -53,8 +53,6 @@ export default function RootLayout({
                     <Link href={"/"}>Inicio</Link>
                 </div>
                 <div className="players">
-                    <p>Usted: {username}</p>
-                    <h3>Participantes: {res?.players_count} en total</h3>
                     <ol><UserList players_games={res?.players_games} username={username}/></ol>
                 </div>
 

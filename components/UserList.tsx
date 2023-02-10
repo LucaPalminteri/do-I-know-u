@@ -2,23 +2,21 @@
 import React, { useState } from 'react'
 import { player_game } from "@/types/games";
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import supabase from '@/utils/supabase';    
+import HourglassEmptyRoundedIcon from '@mui/icons-material/HourglassEmptyRounded';
 
-function UserList({players_games,username}:{players_games:Array<player_game>,username:string}) {
+function UserList({players_games,username:player}:{players_games:Array<player_game>,username:string}) {
     const [players, setPlayers] = useState(players_games)
-    const [player, setPlayer] = useState(username)
-    const [playerID, setPlayerID] = useState('')
 
     supabase
     .channel('*')
     .on('postgres_changes', { event: '*', schema: '*',table: 'players_games' }, payload => {
+        console.log(payload);
         
         if (payload.table == 'players_games') {
-            console.log(payload);
-            if (payload.eventType == 'DELETE') {
-                let newPlayers = players.filter(newPlayer => newPlayer.username != player)
-                console.log(newPlayers);
-                setPlayers(newPlayers)  
+            if (payload.eventType == 'DELETE' || payload.eventType == 'UPDATE') {
+                setPlayers(players_games)  
             }
             else {
                 setPlayers(prev => prev.concat(payload.new))
@@ -26,18 +24,27 @@ function UserList({players_games,username}:{players_games:Array<player_game>,use
         }
     }).subscribe()
 
-    let isUserStyle = {
-        marginRight:10,
-        color: 'lightgreen'
-    }
+    players.map(player => console.log(player.isReady))
 
     let arrUsers = players.map(
         (username: player_game, index: number) => (
-            <li key={index} style={username.username == player ? isUserStyle : {}}><SentimentSatisfiedAltIcon style={username.username == player ? isUserStyle : {marginRight:10}}/>{username.username}</li>
+            <li key={index} style={username.username == player ? {color: 'lightgreen'} : {}}>
+                <SentimentSatisfiedAltIcon />
+                <p>{username.username}</p>
+                {username.isReady == 1 ? 
+                <CheckRoundedIcon style={{marginLeft: 'auto'}}/> :
+                <HourglassEmptyRoundedIcon style={{marginLeft: 'auto'}}/>
+                }
+            </li>
         )
     );
 
-  return <>{arrUsers}</>
+  return (
+    <>
+        <h3>Participantes: {players.length} en total</h3>
+        {arrUsers}
+    </>
+    )
     
 }
 
