@@ -30,14 +30,15 @@ export default function Home() {
       </header>
 
       <div className='option'>
-        <h2>Nuevo Juego</h2>
         <NewGameButton/>
       </div>
       <div className='option'>
-        { hasCookie ? <Link href={`/game/${playerCode}`}>Continuar juego</Link> : <JoinGame/>}
+        { hasCookie ? <Link href={`/game/${playerCode}`}><h2>Continuar juego</h2></Link> : <JoinGame/>}
       </div>
-      <div className='option'>
-        <Link href={'/information'}>¿Cómo se juega?</Link>
+      <div className='option info'>
+        <Link href={'/information'}>
+          <h2>¿Cómo se juega?</h2>
+        </Link>
       </div>
     </main>
   )

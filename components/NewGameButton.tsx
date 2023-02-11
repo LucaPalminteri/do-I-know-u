@@ -1,16 +1,26 @@
 'use client'
 
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Loader from './Loader'
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+const AOS_DURATION:number = 600;
 
 function NewGameButton() {
 
   let router = useRouter()
 
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
+  const [view, setView] = useState(false)
 
   
   async function startGame() {
@@ -25,20 +35,33 @@ function NewGameButton() {
     setUsername(e.target.value);
   };
 
+  function toggleView() {
+    setView(prev => !prev)
+  }
+
   return (
     <div className='new-game'>
+      <h2 onClick={toggleView}>Nuevo juego</h2>
       {isLoading && <Loader show={true} />}
-        <label htmlFor="">Nombre:</label>
+      {view ? 
+      <div  className={`new-game-input-container `}>
         <input 
-         type="text" 
-         required
-         value={username}
-         onChange={handleChange}
-         maxLength={30}
-        />
+          data-aos="fade-left"
+          data-aos-duration={AOS_DURATION}
+          type="text" 
+          required
+          value={username}
+          onChange={handleChange}
+          maxLength={30}
+          placeholder={'Nombre...'}
+         />
         <button
-        onClick={startGame}
+          data-aos="fade-right"
+          data-aos-duration={AOS_DURATION}
+          onClick={startGame} 
         >Iniciar</button>
+      </div>
+         : <></>} 
     </div>
   )
 }

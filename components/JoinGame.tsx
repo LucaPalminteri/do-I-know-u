@@ -1,28 +1,42 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import PopUp from './PopUpMessage';
 import Loader from './Loader';
 import Link from 'next/link';
 import Cookies from 'js-cookie'
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+const AOS_DURATION:number = 600;
 
 export default function JoinGame() {
 
-    let cookies = Cookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!)
+    //let cookies = Cookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!)
 
-    console.log(cookies);
+    useEffect(() => {
+        AOS.init();
+        AOS.refresh();
+      }, []);
+
     const [code, setCode] = useState('');
 
     const [showPopUp, setShowPopUp] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
+    const [view, setView] = useState(false)
+
 
     const closePopUp = () => {
         setShowPopUp(false);
     };
+
+    function toggleView() {
+        setView(prev => !prev)
+      }
 
     const router = useRouter()
 
@@ -81,29 +95,44 @@ export default function JoinGame() {
             {showPopUp && <PopUp message={message} code={code} closePopUp={closePopUp} />}
             {isLoading && <Loader show={true} />}
 
-            {}
-
-            <h3>Unirme a una partida</h3>
-            <label htmlFor="">Nombre:</label>
+            <h2 onClick={toggleView}>Unirme a una partida</h2>
+            {
+                view ?
+            <>  
             <input 
+                data-aos="fade-right"
+                data-aos-duration={AOS_DURATION}
                 type="text" 
                 required
                 value={username}
                 onChange={handleUsernameChange}
                 maxLength={30}
+                placeholder='Nombre...'
             />
 
-            <h3>Inserte el codigo</h3>
+            <div className='code-input-container'>
+                <h3
+                    data-aos="fade-right"
+                    data-aos-duration={AOS_DURATION + 200}
+                >Código</h3>
 
-            <input
-                type="text"
-                value={code}
-                onChange={handleChange}
-                maxLength={6}
-            />
+                <input
+                    data-aos="fade-left"
+                    data-aos-duration={AOS_DURATION + 200}
+                    type="text"
+                    value={code}
+                    onChange={handleChange}
+                    maxLength={6}
+                    className='code-input'
+                />
+            </div>
+
             <button
+                data-aos="fade-left"
+                data-aos-duration={AOS_DURATION + 400}
                 onClick={handleClick}
             >Unirme</button>
+            </> : <></>}
         </div>
     )
 }

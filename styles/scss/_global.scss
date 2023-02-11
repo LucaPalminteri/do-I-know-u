@@ -1,11 +1,12 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 * {
     margin: 0;
     padding: 0;
 }
 
-html,body {
+html,
+body {
     text-align: center;
     background-color: $main-dark-color;
     color: $main-text-color;
@@ -15,7 +16,8 @@ button {
     border: none;
     border-radius: $border-radius;
     padding: 8px;
-    transition-duration: .2s;
+    transition-duration: 0.2s;
+    background-color: #90ee90;
 
     &:hover {
         cursor: pointer;
@@ -29,6 +31,7 @@ input {
     padding: 6px;
     text-indent: 6px;
     border-radius: $border-radius;
+    text-align: center;
 
     &:focus {
         outline: none;
@@ -38,7 +41,7 @@ input {
 a {
     text-decoration: none;
     color: $main-text-color;
-    transition-duration: .2s;
+    transition-duration: 0.2s;
 
     &:hover {
         color: lightgreen;
