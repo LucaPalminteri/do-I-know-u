@@ -1,79 +1,79 @@
 .root {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  header {
-    background-color: $secondary-dark-color;
-    width: 100%;
+    header {
+        background-color: $secondary-dark-color;
+        width: 100%;
 
-    h1 {
-      padding: 20px;
-    }
-  }
-
-  .option {
-    background-color: #444;
-    margin: 30px 0;
-    padding: 30px;
-    border-radius: $border-radius;
-    transition-duration: 0.2s;
-    width: 260px;
-
-    input {
-      margin-top: 30px;
+        h1 {
+            padding: 20px;
+        }
     }
 
-    h2 {
-      cursor: pointer;
-      user-select: none;
-
-      &:hover {
-        color: #90ee90;
-      }
-    }
-
-    .new-game {
-      display: flex;
-      flex-direction: column;
-      transition-duration: 1s;
-
-      .new-game-input-container {
-        display: flex;
-        flex-direction: column;
+    .option {
+        background-color: #444;
+        margin: 30px 0;
+        padding: 30px;
+        border-radius: $border-radius;
+        transition-duration: 0.2s;
+        width: 260px;
 
         input {
-          margin-bottom: 10px;
+            margin-top: 30px;
         }
-      }
 
-      .animation-enter {
-        background-color: red;
-      }
+        h2 {
+            cursor: pointer;
+            user-select: none;
 
-      .animation-exit {
-        background-color: blue;
-      }
-    }
-
-    .join-game {
-      display: flex;
-      flex-direction: column;
-
-      .code-input-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 10px 0;
-
-        .code-input {
-          font-size: 24px;
-          width: 130px;
-          text-align: center;
-          margin-top: 0;
+            &:hover {
+                color: #90ee90;
+            }
         }
-      }
+
+        .new-game {
+            display: flex;
+            flex-direction: column;
+            transition-duration: 1s;
+
+            .new-game-input-container {
+                display: flex;
+                flex-direction: column;
+
+                input {
+                    margin-bottom: 10px;
+                }
+            }
+
+            .animation-enter {
+                background-color: red;
+            }
+
+            .animation-exit {
+                background-color: blue;
+            }
+        }
+
+        .join-game {
+            display: flex;
+            flex-direction: column;
+
+            .code-input-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 10px 0;
+
+                .code-input {
+                    font-size: 24px;
+                    width: 130px;
+                    text-align: center;
+                    margin-top: 0;
+                }
+            }
+        }
     }
-  }
 }

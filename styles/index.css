@@ -3,29 +3,32 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   text-align: center;
   background-color: #222;
-  color: #EEE;
+  color: #FFF;
 }
 
 button {
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 8px;
   transition-duration: 0.2s;
+  background-color: #90ee90;
 }
 button:hover {
   cursor: pointer;
   background-color: #666;
-  color: #EEE;
+  color: #FFF;
 }
 
 input {
   border: none;
   padding: 6px;
   text-indent: 6px;
-  border-radius: 10px;
+  border-radius: 5px;
+  text-align: center;
 }
 input:focus {
   outline: none;
@@ -33,7 +36,7 @@ input:focus {
 
 a {
   text-decoration: none;
-  color: #EEE;
+  color: #FFF;
   transition-duration: 0.2s;
 }
 a:hover {
@@ -63,7 +66,7 @@ a:hover {
 .popup-box {
   background-color: #444;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   z-index: 10;
 }
@@ -71,7 +74,7 @@ a:hover {
 button.popup-close {
   background-color: #ddd;
   border: 1px solid #999;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px 10px;
   margin-top: 10px;
   cursor: pointer;
@@ -154,7 +157,7 @@ button.popup-close:hover {
   align-items: center;
   justify-content: center;
   background-color: #666;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 200px;
   padding: 20px;
 }
@@ -180,27 +183,55 @@ button.popup-close:hover {
   background-color: #444;
   margin: 30px 0;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 5px;
   transition-duration: 0.2s;
+  width: 260px;
 }
-.root .option .join-game h3 {
-  margin: 5px;
+.root .option input {
+  margin-top: 30px;
 }
-.root .option .join-game input {
+.root .option h2 {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.root .option h2:hover {
+  color: #90ee90;
+}
+.root .option .new-game {
+  display: flex;
+  flex-direction: column;
+  transition-duration: 1s;
+}
+.root .option .new-game .new-game-input-container {
+  display: flex;
+  flex-direction: column;
+}
+.root .option .new-game .new-game-input-container input {
+  margin-bottom: 10px;
+}
+.root .option .new-game .animation-enter {
+  background-color: red;
+}
+.root .option .new-game .animation-exit {
+  background-color: blue;
+}
+.root .option .join-game {
+  display: flex;
+  flex-direction: column;
+}
+.root .option .join-game .code-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.root .option .join-game .code-input-container .code-input {
   font-size: 24px;
-  margin: 20px;
   width: 130px;
   text-align: center;
-}
-.root .option .join-game button {
-  margin: 10px;
-}
-.root .option:hover {
-  color: lightgreen;
-  background-color: #666;
-}
-.root .option:focus {
-  transform: scale(0.7);
+  margin-top: 0;
 }
 
 @keyframes show {

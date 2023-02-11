@@ -18,8 +18,7 @@
         opacity: 1;
     }
     90% {
-
-        opacity: .5;
+        opacity: 0.5;
     }
 
     100% {
@@ -31,30 +30,26 @@
     display: flex;
     width: 100vw;
     height: 100vh;
-    
+
     main {
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         .do-i-knou-you {
             animation-name: show;
             animation-duration: 3s;
-            animation-timing-function: cubic-bezier(.28,.68,.83,0);
-            //animation-timing-function: ease-in;
+            animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
 
             h1 {
                 animation-name: show-title;
-            animation-duration: 3s;
-            animation-timing-function: cubic-bezier(.28,.68,.83,0);
-            opacity: 0;
-            
+                animation-duration: 3s;
+                animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
+                opacity: 0;
             }
-            
         }
-        
     }
 
     aside {
@@ -62,7 +57,6 @@
         border: 3px solid #ffd700;
         position: relative;
         left: 0;
-
 
         .inicio-link {
             padding: 20px 0;
