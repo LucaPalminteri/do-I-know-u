@@ -82,6 +82,13 @@
             }
         }
 
+        .cronometer {
+            background-color: $secondary-dark-color;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 28px;
+        }
+
         .code {
             outline: 3px solid yellow;
             display: flex;

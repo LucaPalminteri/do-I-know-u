@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import WebcamComponent from "@/components/Webcam";
 import CopyCode from "@/components/CopyCode";
 import UserList from "@/components/UserList";
+import Cronometer from "@/components/Cronometer";
 
 async function getInfo(code: string) {
     try {
@@ -56,6 +57,8 @@ export default function RootLayout({
                     <ol><UserList players_games={res?.players_games} username={username}/></ol>
                 </div>
 
+                <Cronometer />
+                
                 <div className="code">
                     <CopyCode code={code}/>
                     <ShareButton code={code} />

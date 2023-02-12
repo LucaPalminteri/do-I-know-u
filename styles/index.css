@@ -306,6 +306,12 @@ button.popup-close:hover {
 .game-room aside .players ol li p {
   margin-left: 10px;
 }
+.game-room aside .cronometer {
+  background-color: #666;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 28px;
+}
 .game-room aside .code {
   outline: 3px solid yellow;
   display: flex;
@@ -331,4 +337,11 @@ button.popup-close:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.do-i-knou-you .title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }/*# sourceMappingURL=index.css.map */

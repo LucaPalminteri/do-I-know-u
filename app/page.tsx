@@ -3,6 +3,7 @@ import JoinGame from '@/components/JoinGame'
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import NewGameButton from '@/components/NewGameButton';
+import React from 'react';
 
 export default function Home() {
   // TODO: Fix button if continue or join
