@@ -54,16 +54,21 @@
 
     aside {
         min-width: 14%;
-        border: 3px solid #ffd700;
+        //border: 3px solid #ffd700;
         position: relative;
         left: 0;
+        background-color: $secondary-dark-color;
 
         .inicio-link {
             padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #505050;
         }
 
         .players {
-            outline: 3px solid #ffd700;
+            //outline: 3px solid #ffd700;
             padding: 20px 0;
 
             ol {
@@ -90,7 +95,7 @@
         }
 
         .code {
-            outline: 3px solid yellow;
+            //outline: 3px solid yellow;
             display: flex;
             flex-direction: column;
             justify-content: center;

@@ -19,8 +19,7 @@ button {
 }
 button:hover {
   cursor: pointer;
-  background-color: #666;
-  color: #FFF;
+  background-color: #ffd700;
 }
 
 input {
@@ -171,10 +170,14 @@ button.popup-close:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100vw;
+  min-height: 100vh;
 }
 .root header {
   background-color: #666;
   width: 100%;
+  position: fixed;
+  top: 0;
 }
 .root header h1 {
   padding: 20px;
@@ -283,15 +286,18 @@ button.popup-close:hover {
 }
 .game-room aside {
   min-width: 14%;
-  border: 3px solid #ffd700;
   position: relative;
   left: 0;
+  background-color: #666;
 }
 .game-room aside .inicio-link {
   padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #505050;
 }
 .game-room aside .players {
-  outline: 3px solid #ffd700;
   padding: 20px 0;
 }
 .game-room aside .players ol {
@@ -313,7 +319,6 @@ button.popup-close:hover {
   font-size: 28px;
 }
 .game-room aside .code {
-  outline: 3px solid yellow;
   display: flex;
   flex-direction: column;
   justify-content: center;

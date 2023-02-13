@@ -9,6 +9,7 @@ import WebcamComponent from "@/components/Webcam";
 import CopyCode from "@/components/CopyCode";
 import UserList from "@/components/UserList";
 import Cronometer from "@/components/Cronometer";
+import HomeLink from "@/components/HomeLink";
 
 async function getInfo(code: string) {
     try {
@@ -50,8 +51,8 @@ export default function RootLayout({
             </main>
 
             <aside>
-                <div className="inicio-link">
-                    <Link href={"/"}>Inicio</Link>
+                <div>
+                    <HomeLink/>
                 </div>
                 <div className="players">
                     <ol><UserList players_games={res?.players_games} username={username}/></ol>
