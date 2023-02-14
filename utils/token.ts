@@ -22,7 +22,7 @@ export function createToken(username: string, code: string): string {
 }
 
 export function deleteToken(): string {
-    const serialized: string = serialize(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!, null, {
+    const serialized: string = serialize(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!, '', {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
