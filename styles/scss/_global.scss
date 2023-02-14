@@ -47,3 +47,32 @@ a {
         color: lightgreen;
     }
 }
+
+.inicio-link {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #505050;
+}
+
+.information {
+
+    h1 {
+        margin-top: 40px;
+    }
+
+    p {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .information {
+    
+        p {
+            padding: 10px;
+        }
+    }
+}

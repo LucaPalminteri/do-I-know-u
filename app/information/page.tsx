@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
+import HomeLink from '@/components/HomeLink';
 
 function Information() {
   return (
-    <div>
-        <Link href={'/'}>Volver</Link>
+    <div className='information'>
+        <HomeLink />
         <h1>¿Cómo se juega?</h1>
         <h2>Introducción</h2>
         <p>

@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 
 function HomeLink() {
   return (
-    <div  >
+    <div>
         <Link href={"/"} className="inicio-link">
             <HomeIcon style={{marginRight:10}}/>
             <h2>Inicio</h2> 
