@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
     }
 
     // todo ok
-    if (code == data[0].code) {
+    if (data != null && code == data[0].code) {
       return NextResponse.next();
     }
   } catch (error) {
