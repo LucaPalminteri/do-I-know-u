@@ -58,6 +58,7 @@ function NewGameButton() {
         <button
           data-aos="fade-right"
           data-aos-duration={AOS_DURATION}
+          data-aos-delay={100}
           onClick={startGame} 
         >Iniciar</button>
       </div>

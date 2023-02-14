@@ -113,12 +113,14 @@ export default function JoinGame() {
             <div className='code-input-container'>
                 <h3
                     data-aos="fade-right"
-                    data-aos-duration={AOS_DURATION + 200}
+                    data-aos-duration={AOS_DURATION}
+                    data-aos-delay={100}
                 >Código</h3>
 
                 <input
                     data-aos="fade-left"
-                    data-aos-duration={AOS_DURATION + 200}
+                    data-aos-duration={AOS_DURATION}
+                    data-aos-delay={150}
                     type="text"
                     value={code}
                     onChange={handleChange}
@@ -129,7 +131,8 @@ export default function JoinGame() {
 
             <button
                 data-aos="fade-left"
-                data-aos-duration={AOS_DURATION + 400}
+                data-aos-duration={AOS_DURATION}
+                data-aos-delay={200}
                 onClick={handleClick}
             >Unirme</button>
             </> : <></>}
