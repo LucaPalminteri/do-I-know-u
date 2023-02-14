@@ -18,7 +18,7 @@ function UserList({players_games,username:player}:{players_games:Array<player_ga
                 setPlayers(players_games)  
             }
             else {
-                setPlayers(prev => prev.concat(payload.new))
+                //setPlayers(prev => prev.concat(payload.new))
             }
         }
     }).subscribe()

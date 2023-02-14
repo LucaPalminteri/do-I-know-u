@@ -16,12 +16,12 @@ export default function Home() {
   let playerUsername = "", playerCode = ''
 
   if (hasCookie) {
-    let { username, code } = jwt.verify(
-        cookie?.value,
-        process.env.NEXT_PUBLIC_TOKEN_NAME
+    let token:any = jwt.verify(
+        String(cookie?.value),
+        String(process.env.NEXT_PUBLIC_TOKEN_NAME)
     );
 
-    playerCode = code
+    playerCode = token.code
   }
 
   return (
