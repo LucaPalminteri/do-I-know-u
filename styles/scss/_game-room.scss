@@ -42,12 +42,19 @@
             animation-name: show;
             animation-duration: 3s;
             animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
+            position: relative;
 
             h1 {
                 animation-name: show-title;
                 animation-duration: 3s;
                 animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
                 opacity: 0;
+                position: absolute;
+                top: auto;
+                left: auto;
+                right: auto;
+                bottom: auto;
+
             }
         }
     }
@@ -112,6 +119,16 @@
                 display: flex;
                 align-items: center;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .game-room {
+
+        aside {
+            display: none;
         }
     }
 }

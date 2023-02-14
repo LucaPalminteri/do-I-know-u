@@ -29,13 +29,6 @@ function Questions() {
                 <h3>{res.option_5}</h3>
             </section>
         </main>
-        <aside>
-            <h3>option</h3>
-            <h3>option</h3>
-            <h3>option</h3>
-            <h3>option</h3>
-            <h3>option</h3>
-        </aside>
 
     </div>
   )

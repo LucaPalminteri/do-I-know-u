@@ -277,12 +277,18 @@ button.popup-close:hover {
   animation-name: show;
   animation-duration: 3s;
   animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
+  position: relative;
 }
 .game-room main .do-i-knou-you h1 {
   animation-name: show-title;
   animation-duration: 3s;
   animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
   opacity: 0;
+  position: absolute;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
 }
 .game-room aside {
   min-width: 14%;
@@ -336,6 +342,11 @@ button.popup-close:hover {
   align-items: center;
 }
 
+@media screen and (max-width: 1200px) {
+  .game-room aside {
+    display: none;
+  }
+}
 .do-i-knou-you {
   width: 100%;
   height: 100%;
@@ -388,4 +399,10 @@ button.popup-close:hover {
   padding: 8px;
   width: 100%;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .questions main {
+    padding: 40px;
+  }
 }/*# sourceMappingURL=index.css.map */
