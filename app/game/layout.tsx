@@ -31,12 +31,12 @@ export default function RootLayout({
     const nextCookies = cookies();
     const cookie = nextCookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!);
 
-    let { username, code } = jwt.verify(
-        cookie?.value,
-        process.env.NEXT_PUBLIC_TOKEN_NAME
+    let token: any = jwt.verify(
+        String(cookie?.value),
+        String(process.env.NEXT_PUBLIC_TOKEN_NAME)
     );
 
-    let res = use(getInfo(code));
+    let res = use(getInfo(token.code));
 
     
   
@@ -55,15 +55,15 @@ export default function RootLayout({
                     <HomeLink/>
                 </div>
                 <div className="players">
-                    <ol><UserList players_games={res?.players_games} username={username}/></ol>
+                    <ol><UserList players_games={res?.players_games} username={token.username}/></ol>
                 </div>
 
-                <Cronometer />
+                {/* <Cronometer /> */}
                 
                 <div className="code">
-                    <CopyCode code={code}/>
-                    <ShareButton code={code} />
-                    <LeaveGameButton code={code} username={username}/>
+                    <CopyCode code={token.code}/>
+                    <ShareButton code={token.code} />
+                    <LeaveGameButton code={token.code} username={token.username}/>
                 </div>
             </aside>
 

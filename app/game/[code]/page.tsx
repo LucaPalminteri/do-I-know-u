@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Questions from "@/components/Questions";
 
 function Code() {
 
@@ -23,9 +24,7 @@ function Code() {
             <h1 className="title">Te Conozco?</h1>
             {isReady ? 
                 <div data-aos="fade-down" data-aos-duration={600} data-aos-delay={2800}>
-                    <ol>
-                        <li>Tirar los dados</li>
-                    </ol>
+                    <Questions/>
                 </div> 
             // : <button onClick={handleStart}>Empezar</button>}
             : <></>}

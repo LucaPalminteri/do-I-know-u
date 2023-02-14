@@ -349,4 +349,43 @@ button.popup-close:hover {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.questions {
+  display: flex;
+}
+.questions main {
+  padding: 0 100px;
+  display: flex;
+  flex-direction: column;
+}
+.questions main h2 {
+  width: 100%;
+  padding: 20px;
+  background-color: #666;
+}
+.questions main section {
+  width: 100%;
+}
+.questions main section h3 {
+  margin: 20px 0;
+  background-color: #666;
+  padding: 8px 0;
+  width: 100%;
+  border-radius: 5px;
+}
+.questions aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  width: 100%;
+}
+.questions aside h3 {
+  margin: 20px 0;
+  background-color: #666;
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
 }/*# sourceMappingURL=index.css.map */
