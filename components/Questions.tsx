@@ -1,35 +1,28 @@
 import React, {use} from 'react'
 import supabase from '@/utils/supabase'
+import { question } from '@/types/games';
+import QuestionsClient from './QuestionsClient';
 
 async function getInfo() {
     try {
-        const { data, error } = await supabase
+        const { data, count, error } = await supabase
             .from("questions")
-            .select()
-        if (data == null) return;
-        return data[0];
+            .select('*',{ count: 'exact' })
+        
+        if (data == null || count == null) return;
+
+        let index = Math.floor(Math.random() * count)
+        
+        return data[index];
     } catch (error) { }
 }
 
 function Questions() {
 
-    let res = use(getInfo());
-
-    console.log(res);
-
+    let res: question = use(getInfo());
   return (
     <div className='questions'>
-        <main>
-            <h2>{res.question}</h2>
-            <section>
-                <h3>{res.option_1}</h3>
-                <h3>{res.option_2}</h3>
-                <h3>{res.option_3}</h3>
-                <h3>{res.option_4}</h3>
-                <h3>{res.option_5}</h3>
-            </section>
-        </main>
-
+        <QuestionsClient question={res}/>
     </div>
   )
 }
