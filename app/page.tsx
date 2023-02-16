@@ -24,6 +24,7 @@ export default function Home() {
     playerCode = token.code
   }
 
+  console.log({playerCode,hasCookie});
   return (
     <main className='root'>
       <header>
