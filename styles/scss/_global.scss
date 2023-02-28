@@ -76,3 +76,26 @@ a {
         }
     }
 }
+
+.insert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .form-insert {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 100%;
+        }
+    }
+}

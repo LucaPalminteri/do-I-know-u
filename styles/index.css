@@ -62,6 +62,26 @@ a:hover {
     padding: 10px;
   }
 }
+.insert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.insert .form-insert {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.insert .form-insert label {
+  margin-top: 20px;
+}
+.insert .form-insert button {
+  margin-top: 50px;
+  width: 100%;
+}
+
 .popup-container {
   position: fixed;
   top: 0;
