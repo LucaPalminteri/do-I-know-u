@@ -73,13 +73,22 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 90vw;
 }
 .insert .form-insert label {
   margin-top: 20px;
 }
+.insert .form-insert input {
+  width: 97%;
+  font-size: 20px;
+}
 .insert .form-insert button {
   margin-top: 50px;
   width: 100%;
+  font-size: 30px;
+}
+.insert .form-insert button:active {
+  transform: scale(0.9);
 }
 
 .popup-container {

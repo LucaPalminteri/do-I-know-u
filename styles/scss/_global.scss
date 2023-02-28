@@ -88,14 +88,25 @@ a {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 90vw;
 
         label {
             margin-top: 20px;
         }
 
+        input {
+            width: 97%;
+            font-size: 20px;
+        }
+
         button {
             margin-top: 50px;
             width: 100%;
+            font-size: 30px;
+
+            &:active {
+                transform: scale(.9);
+            }
         }
     }
 }
