@@ -115,14 +115,53 @@
             }
         }
     }
+
+    .mobile-aside {
+        width: 100vw;
+        height: 6vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            a {
+                padding: 0;
+                height: 6vh;
+                background-color: transparent;
+            }
+
+            button {
+                height: 6vh;
+                display: flex;
+                align-items: center;
+                background-color: #555;
+                border-radius: 0;
+                color: $main-text-color;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1200px) {
 
     .game-room {
 
-        aside {
+        .desktop-aside {
             display: none;
         }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .mobile-aside {
+        display: none;
     }
 }

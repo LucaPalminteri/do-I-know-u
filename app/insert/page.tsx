@@ -30,7 +30,16 @@ function Insert() {
 
     const insertData = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        console.log(question);
+        if (question.question.trim() == '' ||
+            question.option_1.trim() == '' ||
+            question.option_2.trim() == '' ||
+            question.option_3.trim() == '' ||
+            question.option_4.trim() == '' ||
+            question.option_5.trim() == ''
+        ) {
+            alert('Cannot send empty fields. Some fields are empty.')
+            return;
+        }
         try {
             const {data, error} = await supabase.from('questions').insert(question)
             if (error) return;

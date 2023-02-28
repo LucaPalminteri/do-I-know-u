@@ -10,6 +10,7 @@ import CopyCode from "@/components/CopyCode";
 import UserList from "@/components/UserList";
 import Cronometer from "@/components/Cronometer";
 import HomeLink from "@/components/HomeLink";
+import AsideMobile from "@/components/AsideMobile";
 
 async function getInfo(code: string) {
     try {
@@ -50,7 +51,7 @@ export default function RootLayout({
                 {false && <WebcamComponent/>}
             </main>
 
-            <aside>
+            <aside className="desktop-aside">
                 <div>
                     <HomeLink/>
                 </div>
@@ -66,6 +67,7 @@ export default function RootLayout({
                     <LeaveGameButton code={token.code} username={token.username}/>
                 </div>
             </aside>
+            <AsideMobile code={token.code} username={token.username}/>
 
         </div>
     </div>
