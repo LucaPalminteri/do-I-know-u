@@ -57,7 +57,10 @@ a:hover {
   padding: 20px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 800px) {
+  body {
+    margin-top: 6dvh;
+  }
   .information p {
     padding: 10px;
   }
@@ -419,7 +422,7 @@ button.popup-close:hover {
   }
 }
 @media screen and (min-width: 1200px) {
-  .mobile-aside {
+  .game-room .mobile-aside {
     display: none;
   }
 }

@@ -20,35 +20,35 @@ function QuestionsClient({question}:{question:question}) {
   return (
     <main>
         <h2
-            data-aos={AOS_ANIMATION}
-            data-aos-duration={AOS_DURATION} 
-            data-aos-delay={AOS_MAX_DELAY}
+            // data-aos={AOS_ANIMATION}
+            // data-aos-duration={AOS_DURATION} 
+            // data-aos-delay={AOS_MAX_DELAY}
         >{question.question}</h2>
         <section>
             <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - DELAY_BETWEEN}
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - DELAY_BETWEEN}
             >{question.option_1}</h3>
             <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (2 * DELAY_BETWEEN)}
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (2 * DELAY_BETWEEN)}
             >{question.option_2}</h3>
             <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (3 * DELAY_BETWEEN)}
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (3 * DELAY_BETWEEN)}
             >{question.option_3}</h3>
             <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (4 * DELAY_BETWEEN)}
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (4 * DELAY_BETWEEN)}
             >{question.option_4}</h3>
             <h3 
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (5 * DELAY_BETWEEN)}
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (5 * DELAY_BETWEEN)}
             >{question.option_5}</h3>
         </section>
     </main>
