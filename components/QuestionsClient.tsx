@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { question } from '@/types/games'
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -16,40 +16,55 @@ function QuestionsClient({question}:{question:question}) {
         AOS.refresh();
       }, []);
 
-    console.log(question);
+      const [selected, setSelScted] = useState(false)
+
+    const handleAnswer = (value: string | null, option:number) => {
+        if (option === 1) setSelScted(true)
+        else if (option === 2) console.log(value)
+        else if (option === 3) console.log(value)
+        else if (option === 4) console.log(value)
+        else if (option === 5) console.log(value)
+        else return;
+    }
   return (
     <main>
         <h2
-            data-aos={AOS_ANIMATION}
-            data-aos-duration={AOS_DURATION} 
-            data-aos-delay={AOS_MAX_DELAY}
+            // data-aos={AOS_ANIMATION}
+            // data-aos-duration={AOS_DURATION} 
+            // data-aos-delay={AOS_MAX_DELAY}
         >{question.question}</h2>
         <section>
-            <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - DELAY_BETWEEN}
-            >{question.option_1}</h3>
-            <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (2 * DELAY_BETWEEN)}
-            >{question.option_2}</h3>
-            <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (3 * DELAY_BETWEEN)}
-            >{question.option_3}</h3>
-            <h3
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (4 * DELAY_BETWEEN)}
-            >{question.option_4}</h3>
-            <h3 
-                data-aos={AOS_ANIMATION} 
-                data-aos-duration={AOS_DURATION} 
-                data-aos-delay={AOS_MAX_DELAY - (5 * DELAY_BETWEEN)}
-            >{question.option_5}</h3>
+            <button
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - DELAY_BETWEEN}
+                className={selected ? 'btn-selected' : ''}
+                onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,1)}
+            >{question.option_1}</button>
+            <button
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (2 * DELAY_BETWEEN)}
+                onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,2)}
+            >{question.option_2}</button>
+            <button
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (3 * DELAY_BETWEEN)}
+                onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,3)}
+            >{question.option_3}</button>
+            <button
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (4 * DELAY_BETWEEN)}
+                onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,4)}
+            >{question.option_4}</button>
+            <button 
+                // data-aos={AOS_ANIMATION} 
+                // data-aos-duration={AOS_DURATION} 
+                // data-aos-delay={AOS_MAX_DELAY - (5 * DELAY_BETWEEN)}
+                onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,5)}
+            >{question.option_5}</button>
         </section>
     </main>
   )
