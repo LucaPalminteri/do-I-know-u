@@ -12,6 +12,7 @@ function UserList({players_games,username:player}:{players_games:Array<player_ga
     supabase
     .channel('*')
     .on('postgres_changes', { event: '*', schema: '*',table: 'players_games' }, payload => {
+        console.log(payload);
         
         if (payload.table == 'players_games') {
             if (payload.eventType == 'DELETE' || payload.eventType == 'UPDATE') {

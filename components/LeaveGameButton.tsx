@@ -10,7 +10,8 @@ function LeaveGameButton({code,username}:{code:string,username: string}) {
     let route = useRouter()
 
     async function handleClick() {
-
+      console.log("prev");
+      console.log({code,username});
         await axios.post('/api/leave-game',{code,username})
         route.push('/')
     }

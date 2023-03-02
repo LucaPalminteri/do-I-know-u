@@ -325,23 +325,6 @@ button.popup-close:hover {
   justify-content: center;
   align-items: center;
 }
-.game-room main .do-i-knou-you {
-  animation-name: show;
-  animation-duration: 3s;
-  animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
-  position: relative;
-}
-.game-room main .do-i-knou-you h1 {
-  animation-name: show-title;
-  animation-duration: 3s;
-  animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
-  opacity: 0;
-  position: absolute;
-  top: auto;
-  left: auto;
-  right: auto;
-  bottom: auto;
-}
 .game-room aside {
   min-width: 14%;
   position: relative;

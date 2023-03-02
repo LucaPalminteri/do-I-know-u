@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 import WebcamComponent from "@/components/Webcam";
 import CopyCode from "@/components/CopyCode";
 import UserList from "@/components/UserList";
-import Cronometer from "@/components/Cronometer";
 import HomeLink from "@/components/HomeLink";
 import AsideMobile from "@/components/AsideMobile";
 

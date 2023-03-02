@@ -32,12 +32,12 @@ export default async function joinGame(
             .select();
 
         // delete username in table players_games
-        await supabase.from("players_games").delete().eq("id", player[0].id).select();
+        await supabase.from("players_games").delete().eq("id", player[0].id);
 
         // if theres no players left in the game, the game should also be deleted
         if (players_count != null && data[0].players_count <= 1) {
-            await supabase.from("games").delete().eq("id", data[0].id);
-
+            let res = await supabase.from("games").delete().eq("id", data[0].id).select();
+            console.log(res);
         }
 
         let serialized: string = deleteToken()

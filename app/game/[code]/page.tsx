@@ -26,7 +26,7 @@ function Code() {
 
     return (
         <div className="do-i-knou-you">
-            <h1 className="title">Te Conozco?</h1>
+            {/* <h1 className="title">Te Conozco?</h1> */}
             {/* {isReady ?  */}
                 {/* // <div data-aos="fade-down" data-aos-duration={600} data-aos-delay={2800}> */}
                 <div >
