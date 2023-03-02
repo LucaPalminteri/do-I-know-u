@@ -457,7 +457,11 @@ button.popup-close:hover {
 .questions main section {
   width: 100%;
 }
-.questions main section h3 {
+.questions main section .btn-selected {
+  background-color: green;
+}
+.questions main section button {
+  color: #FFF;
   margin: 20px 0;
   background-color: #666;
   padding: 8px 0;

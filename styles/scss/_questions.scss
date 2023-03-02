@@ -15,7 +15,12 @@
         section {
             width: 100%;
 
-            h3 {
+            .btn-selected {
+                background-color: green;
+            }
+
+            button {
+                color: #FFF;
                 margin: 20px 0;
                 background-color: $secondary-dark-color;
                 padding: 8px 0;
