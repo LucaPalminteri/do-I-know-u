@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import supabase from '@/utils/supabase'
-import { iQuestion } from '@/types/games'
+import { iQuestion } from '@/types/types'
 
 
 function Insert() {

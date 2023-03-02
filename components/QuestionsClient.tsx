@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { question } from '@/types/games'
+import { question } from '@/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 

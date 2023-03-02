@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
-import { player_game } from "@/types/games";
+import { player_game } from "@/types/types";
 import { createToken } from "@/utils/token";
 
 const MAX_COUNT_PLAYERS = 7;

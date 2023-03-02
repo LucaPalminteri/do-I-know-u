@@ -40,3 +40,10 @@ export type iQuestion = {
     option_4: string,
     option_5: string
 }
+
+export type questions_games = {
+    id?: number,
+    created_at: Date,
+    question_id: number,
+    game_id: string
+}

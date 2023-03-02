@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
-import { player_game } from "@/types/games";
+import { player_game } from "@/types/types";
 import { deleteToken } from "@/utils/token";
 
 export default async function joinGame(
@@ -37,7 +37,6 @@ export default async function joinGame(
         // if theres no players left in the game, the game should also be deleted
         if (players_count != null && data[0].players_count <= 1) {
             let res = await supabase.from("games").delete().eq("id", data[0].id).select();
-            console.log(res);
         }
 
         let serialized: string = deleteToken()

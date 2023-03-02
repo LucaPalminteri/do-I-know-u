@@ -6,7 +6,6 @@ import NewGameButton from '@/components/NewGameButton';
 import React from 'react';
 
 export default function Home() {
-  // TODO: Fix button if continue or join
 
   const nextCookies = cookies();
   const cookie = nextCookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!);
@@ -24,7 +23,6 @@ export default function Home() {
     playerCode = token.code
   }
 
-  console.log({playerCode,hasCookie});
   return (
     <main className='root'>
       <header>

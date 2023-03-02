@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { player_game } from "@/types/games";
+import { player_game } from "@/types/types";
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import supabase from '@/utils/supabase';    
@@ -19,7 +19,8 @@ function UserList({players_games,username:player}:{players_games:Array<player_ga
                 setPlayers(players_games)  
             }
             else {
-                //setPlayers(prev => prev.concat(payload.new))
+                let newPlayer: any = payload.new
+                setPlayers(prev => prev.concat(newPlayer))
             }
         }
     }).subscribe()
