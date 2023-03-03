@@ -52,3 +52,21 @@ export type token = {
     code:string,
     player:string
 }
+
+export type player_question = {
+    id?:number,
+    created_at:Date,
+    player:string,
+    question:number,
+    option:number
+}
+
+export type model_player_question = {
+    id: string,
+    created_at:Date,
+    players_count:number,
+    code: string,
+    hasStarted:boolean,
+    players_games: player_game,
+    questions_games: questions_games
+}

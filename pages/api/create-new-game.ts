@@ -31,8 +31,6 @@ export default async function createNewGame(
             .insert({ game: data[0].id, username })
             .select();
 
-        // crear relacion entre game y question para que todos los usuarios empiecen con la misma pregunta
-
         let questions_games:questions_games = {
             created_at: new Date(),
             question_id: Math.floor(Math.random() * 16) + 5,
