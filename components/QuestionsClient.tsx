@@ -4,7 +4,6 @@ import { question } from '@/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from 'axios';
-import { getTokenInfo } from '@/utils/Functions';
 
 const AOS_DURATION:number = 500
 const AOS_MAX_DELAY:number = 2800
@@ -35,39 +34,21 @@ function QuestionsClient({question,code,player}:{question:question,code:string,p
   return (
     <main>
         <h2
-            // data-aos={AOS_ANIMATION}
-            // data-aos-duration={AOS_DURATION} 
-            // data-aos-delay={AOS_MAX_DELAY}
         >{question.question}</h2>
         <section>
             <button
-                // data-aos={AOS_ANIMATION} 
-                // data-aos-duration={AOS_DURATION} 
-                // data-aos-delay={AOS_MAX_DELAY - DELAY_BETWEEN}
                 onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,1)}
             >{question.option_1}</button>
             <button
-                // data-aos={AOS_ANIMATION} 
-                // data-aos-duration={AOS_DURATION} 
-                // data-aos-delay={AOS_MAX_DELAY - (2 * DELAY_BETWEEN)}
                 onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,2)}
             >{question.option_2}</button>
             <button
-                // data-aos={AOS_ANIMATION} 
-                // data-aos-duration={AOS_DURATION} 
-                // data-aos-delay={AOS_MAX_DELAY - (3 * DELAY_BETWEEN)}
                 onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,3)}
             >{question.option_3}</button>
             <button
-                // data-aos={AOS_ANIMATION} 
-                // data-aos-duration={AOS_DURATION} 
-                // data-aos-delay={AOS_MAX_DELAY - (4 * DELAY_BETWEEN)}
                 onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,4)}
             >{question.option_4}</button>
             <button 
-                // data-aos={AOS_ANIMATION} 
-                // data-aos-duration={AOS_DURATION} 
-                // data-aos-delay={AOS_MAX_DELAY - (5 * DELAY_BETWEEN)}
                 onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleAnswer(e.currentTarget.textContent,5)}
             >{question.option_5}</button>
         </section>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { use } from "react";
 import ShareButton from "@/components/ShareButton";
 import supabase from "@/utils/supabase";
@@ -37,9 +36,6 @@ export default function RootLayout({
     );
 
     let res = use(getInfo(token.code));
-
-    
-  
 
   return (
     <div>
