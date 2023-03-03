@@ -47,3 +47,8 @@ export type questions_games = {
     question_id: number,
     game_id: string
 }
+
+export type token = {
+    code:string,
+    player:string
+}
