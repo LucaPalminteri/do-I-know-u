@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
-import { getRandomCode } from "@/utils/Functions";
 import { createToken } from "@/utils/token";
 
 import { questions_games } from "@/types/types";
@@ -28,7 +27,7 @@ export default async function createNewGame(
 
         await supabase
             .from("players_games")
-            .insert({ game: data[0].id, username })
+            .insert({ game: data[0].id, username,place:1 })
             .select();
 
         let questions_games:questions_games = {
@@ -42,13 +41,22 @@ export default async function createNewGame(
             .insert(questions_games)
             .select()
 
-            console.log("\n\n\n");
-            console.log(qg);
-
-
-
         res.status(200).json(data[0].code);
     } catch (error) {
         res.status(200).json({ data: "error" });
     }
+}
+
+export function getRandomCode():string 
+{
+    let code:string = ""
+    let charASCII:number = 0
+
+    for (let i = 0; i < 6; i++) 
+    {
+        charASCII = Math.floor(Math.random() * 25) + 65
+        code += String.fromCharCode(charASCII)
+    }
+
+    return code
 }

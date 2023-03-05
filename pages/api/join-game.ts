@@ -10,11 +10,7 @@ export default async function joinGame(
     res: NextApiResponse<Object | null>
 ) {
 
-    // TODO: Verify if the player already has a token, if true redirect to the game, otherwise create token
-
     let { code, username } = req.body;
-
-
 
     if(req.headers.cookie == undefined) {
         let serialized = createToken(username,code)
@@ -28,6 +24,8 @@ export default async function joinGame(
             .eq("code", `${code}`);
 
         if (data == null) return;
+
+        console.log();
 
         if (error) res.status(500).json(error);
 
@@ -43,7 +41,6 @@ export default async function joinGame(
             (name: string): boolean => name == username
         );
 
-        // if the user was in the game it can rejoin with the username
         if (isUserInGame) res.status(200).json(data);
 
         if (data?.length == 0) res.status(400).json(data);
@@ -56,17 +53,18 @@ export default async function joinGame(
                 });
             return;
         }
-
-        // add 1 to column 'players_count' in table games
         await supabase
             .from("games")
             .update({ players_count: data[0].players_count + 1 })
             .eq("code", `${code}`);
 
-        // add username to with relationship with table game with code in table players_games
+        let maxPlace:number = data[0].players_games.reduce( (max:player_game, obj:player_game):number => {
+            return obj.place > max.place? obj.place : max.place;
+          });
+
         await supabase
             .from("players_games")
-            .insert({ game: data[0].id, username })
+            .insert({ game: data[0].id, username, place: maxPlace + 1 })
             .select();
 
         res.status(200).json(data);
