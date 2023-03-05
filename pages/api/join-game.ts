@@ -58,14 +58,20 @@ export default async function joinGame(
             .update({ players_count: data[0].players_count + 1 })
             .eq("code", `${code}`);
 
-        let maxPlace:number = data[0].players_games.reduce( (max:player_game, obj:player_game):number => {
-            return obj.place > max.place? obj.place : max.place;
+        let maxPlace:player_game = data[0].players_games.reduce( (max:player_game, obj:player_game):player_game => {
+            return obj.place > max.place? obj : max;
           });
 
-        await supabase
+        let newMaxPlace = maxPlace.place + 1;
+
+        console.log(newMaxPlace);
+
+        let ress = await supabase
             .from("players_games")
-            .insert({ game: data[0].id, username, place: maxPlace + 1 })
+            .insert({ game: data[0].id, username, place: newMaxPlace })
             .select();
+
+        console.log(ress.error);
 
         res.status(200).json(data);
     } catch (error) {
