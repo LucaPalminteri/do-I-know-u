@@ -17,18 +17,18 @@ function QuestionsClient({question,code,player}:{question:question,code:string,p
         AOS.refresh();
       }, []);
 
-      const [selected, setSelScted] = useState(false)
+      const [selected, setSelScted] = useState(0)
 
     const handleAnswer = async (value: string | null, option:number) => {
 
-        let { data } = await axios.post('/api/confirm-answer', {option,code,player});
+        let {data} = await axios.post('/api/confirm-answer', {option,code,player});
         console.log(data);
 
-        if (option === 1) setSelScted(true)
-        else if (option === 2) console.log(value)
-        else if (option === 3) console.log(value)
-        else if (option === 4) console.log(value)
-        else if (option === 5) console.log(value)
+        if (option === 1) setSelScted(1)
+        else if (option === 2) setSelScted(2)
+        else if (option === 3) setSelScted(3)
+        else if (option === 4) setSelScted(4)
+        else if (option === 5) setSelScted(5)
         else return;
     }
   return (
