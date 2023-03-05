@@ -54,7 +54,6 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
 
-        // Valido que tenga minimo 6 caracteres
         if (code.length < 6) {
             setMessage('El código debe tener 6 letras')
             setShowPopUp(true)
@@ -68,7 +67,6 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
         }
         setIsLoading(true)
 
-        // Mando peticion al backend
         let { data } = await axios.post('/api/join-game', { code, username })
 
         if (data.error != null) {
@@ -78,8 +76,6 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
             return;
         }
 
-
-        // valido que exista ese juego en la base de datos
         if (data.length == 0) {
             setIsLoading(false)
             setMessage(`No se encontró ningún juego con el código`)

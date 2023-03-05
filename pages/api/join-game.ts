@@ -9,13 +9,7 @@ export default async function joinGame(
     req: NextApiRequest,
     res: NextApiResponse<Object | null>
 ) {
-
     let { code, username } = req.body;
-
-    if(req.headers.cookie == undefined) {
-        let serialized = createToken(username,code)
-        res.setHeader("Set-Cookie", serialized);
-    }
 
     try {
         let { data, error } = await supabase
@@ -23,27 +17,20 @@ export default async function joinGame(
             .select("*, players_games (*)")
             .eq("code", `${code}`);
 
-        if (data == null) return;
-
-        console.log();
-
         if (error) res.status(500).json(error);
+        
+        if (data == null) return;
+        if (data?.length == 0) res.status(200).json(data);
 
         let usernames: Array<string> = data[0].players_games.map(
             (player: player_game): string => player.username
         );
-
-        let isNameInUse: number = usernames.filter(
-            (name: string): boolean => name == username
-        ).length 
 
         let isUserInGame: boolean = usernames.some(
             (name: string): boolean => name == username
         );
 
         if (isUserInGame) res.status(200).json(data);
-
-        if (data?.length == 0) res.status(400).json(data);
 
         if (data[0].players_count >= MAX_COUNT_PLAYERS) {
             res
@@ -62,16 +49,14 @@ export default async function joinGame(
             return obj.place > max.place? obj : max;
           });
 
-        let newMaxPlace = maxPlace.place + 1;
-
-        console.log(newMaxPlace);
-
-        let ress = await supabase
+        await supabase
             .from("players_games")
-            .insert({ game: data[0].id, username, place: newMaxPlace })
-            .select();
+            .insert({ game: data[0].id, username, place: maxPlace.place + 1 })
 
-        console.log(ress.error);
+        if(req.headers.cookie == undefined) {
+            let serialized = createToken(username,code)
+            res.setHeader("Set-Cookie", serialized);
+        }
 
         res.status(200).json(data);
     } catch (error) {
