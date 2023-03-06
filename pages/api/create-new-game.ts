@@ -25,15 +25,17 @@ export default async function createNewGame(
             return;
         }
 
+        let [ game ] = data
+
         await supabase
             .from("players_games")
-            .insert({ game: data[0].id, username,place:1 })
+            .insert({ game: game.id, username,place:1 })
             .select();
 
         let questions_games:questions_games = {
             created_at: new Date(),
             question_id: Math.floor(Math.random() * 16) + 5,
-            game_id: data[0].id
+            game_id: game.id
         }
 
         const qg = await supabase
@@ -41,7 +43,7 @@ export default async function createNewGame(
             .insert(questions_games)
             .select()
 
-        res.status(200).json(data[0].code);
+        res.status(200).json(game.code);
     } catch (error) {
         res.status(200).json({ data: "error" });
     }

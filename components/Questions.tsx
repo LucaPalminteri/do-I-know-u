@@ -9,10 +9,12 @@ async function getInfo() {
         const { data, error } = await supabase
             .from("questions_games")
             .select('*, questions (*)')
+            .eq('isReady',false)
 
         if (data == null) return;
+        let [questions_games] = data
         
-        return data[0].questions;
+        return questions_games.questions;
     } catch (error) { }
 }
 

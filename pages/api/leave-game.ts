@@ -15,27 +15,26 @@ export default async function joinGame(
             .select("*, players_games (*)")
             .eq("code", `${code}`);
             
-        if (data == null || error) {
-            res.status(500).json(error);
-            return;
-        }
-
+        if (error) res.status(500).json(error);
+        if (data == null) return;
         if (data?.length == 0) res.status(400).json(data);
 
-        let player = data[0].players_games.filter((player: player_game) => player.username == username);
+        let [ game ] = data
+
+        let player = game.players_games.filter((player: player_game) => player.username == username);
 
         let { data:players_count } = await supabase
             .from("games")
-            .update({ players_count: data[0].players_count - 1 })
+            .update({ players_count: game.players_count - 1 })
             .eq("code", `${code}`)
             .select();
 
         await supabase.from("players_questions").delete().eq("player", player[0].id);
         await supabase.from("players_games").delete().eq("id", player[0].id);
 
-        if (players_count != null && data[0].players_count <= 1) {
-            await supabase.from("questions_games").delete().eq("game_id", data[0].id);
-            await supabase.from("games").delete().eq("id", data[0].id);
+        if (players_count != null && game.players_count <= 1) {
+            await supabase.from("questions_games").delete().eq("game_id", game.id);
+            await supabase.from("games").delete().eq("id", game.id);
         }
 
         let serialized: string = deleteToken()

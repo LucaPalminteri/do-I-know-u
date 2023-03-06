@@ -17,7 +17,8 @@ async function getInfo(code: string) {
             .select(`*, players_games (*)`)
             .eq("code", code);
         if (data == null) return;
-        return data[0];
+        let [ game ] = data
+        return game;
     } catch (error) { }
 }
 
