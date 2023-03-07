@@ -15,13 +15,24 @@ async function getInfo() {
         let [questions_games] = data
         
         return questions_games.questions;
-    } catch (error) { }
+    } catch (error) { 
+        console.error(error);
+        return {}
+    }
 }
 
 function Questions() {
     let {code, player} = getTokenInfo()
-
+    
+    supabase
+    .channel('*')
+    .on('postgres_changes', { event: '*', schema: '*',table: 'questions_games' }, async payload => {
+        console.log(payload);
+        res = await getInfo()
+    }).subscribe()
+    
     let res: question = use(getInfo());
+
   return (
     <div className='questions'>
         <QuestionsClient question={res} code={code} player={player}/>

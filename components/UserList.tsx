@@ -30,9 +30,10 @@ function UserList({players_games,username:player}:{players_games:Array<player_ga
             <li key={index} style={username.username == player ? {color: 'lightgreen'} : {}}>
                 <SentimentSatisfiedAltIcon />
                 <p>{username.username}</p>
-                {username.isReady == 1 ? 
-                <CheckRoundedIcon style={{marginLeft: 'auto'}}/> :
-                <HourglassEmptyRoundedIcon style={{marginLeft: 'auto'}}/>
+                {
+                    username.isReady ? 
+                    <CheckRoundedIcon style={{marginLeft: 'auto'}}/> :
+                    <HourglassEmptyRoundedIcon style={{marginLeft: 'auto'}}/>
                 }
             </li>
         )

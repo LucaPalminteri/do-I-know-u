@@ -10,7 +10,7 @@ export type player_game = {
     game:string,
     username:string,
     created_at:string,
-    isReady: number,
+    isReady: boolean,
     place: number
 }
 
