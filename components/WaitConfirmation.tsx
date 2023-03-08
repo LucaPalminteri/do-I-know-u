@@ -4,6 +4,7 @@ import { getTokenInfo } from '@/utils/Functions';
 import { PostgrestResponse, RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 import { game, player_game } from '@/types/types';
 import ConfirmGameButton from './ConfirmGameButton';
+import PlayersReady from './PlayersReady';
 
 async function getInfo() {  
     let { code } = getTokenInfo()
@@ -40,24 +41,10 @@ function WaitConfirmation() {
     let { player } = getTokenInfo()
 
     let data = use(getInfo())
-    let total_players:number = 0;
-    let ready_players:number = 0;
-
-    if (data != undefined && Array.isArray(data.players)) {
-        total_players = data.players.length
-        ready_players = data.players.filter( (player:player_game) => player.isReady == true).length
-    }
-
-    supabase
-    .channel('*')
-    .on('postgres_changes', { event: '*', schema: '*',table: 'players_games' }, async (payload:RealtimePostgresChangesPayload<player_game>) => {
-         console.log(payload.new);
-         ready_players++
-    }).subscribe()
-
+    
   return (
-    <div>
-        <h2>{ready_players}/{total_players} jugadores listos</h2>
+    <div className='wait-confirmation'>
+        <PlayersReady players={data?.players}/>
         <ConfirmGameButton username={player} gameId={data?.game_id}/>
     </div>
   )
