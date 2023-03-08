@@ -325,6 +325,9 @@ button.popup-close:hover {
   justify-content: center;
   align-items: center;
 }
+.game-room main .do-i-knou-you .wait-confirmation button {
+  margin-top: 50px;
+}
 .game-room aside {
   min-width: 14%;
   position: relative;
