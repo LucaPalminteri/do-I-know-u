@@ -42,11 +42,13 @@ export default async function joinGame(
             .eq('player',player_question.player)
 
         if( players_questions.data == undefined) return;
+
         // TODO: cheeck if theres no players left to answer
-        // if (players_questions.data?.length > 0) {
-        //     res.status(200).json({"message": "The player already chose an answer"});
-        //     return;
-        // }
+        
+        if (players_questions.data?.length > 0) {
+            res.status(200).json({"message": "The player already chose an answer"});
+            return;
+        }
 
         await supabase
             .from("players_questions")
@@ -56,11 +58,6 @@ export default async function joinGame(
         .from('questions_games')
         .update({answered_count: game.questions_games[0].answered_count + 1})
         .eq('id', game.questions_games[0].id)
-
-        // cheeck if the count is equal to the amount of players in the game, if its equal change the state of the question isReady to true
-        // if the state of isReady changes it should generate a new question_game field
-        
-        // WHEN questions_games.answeres_count == games.players_count THEN questions_games.isReady = true AND new questions_games
 
         if (game.players_count - 1 == game.questions_games[0].answered_count) {
 
