@@ -22,9 +22,9 @@ function PlayersReady({players}:{players: Array<player_game> | undefined}) {
     supabase
     .channel('*')
     .on('postgres_changes', { event: '*', schema: '*',table: 'players_games' }, async (payload:RealtimePostgresChangesPayload<player_game>) => {
-         console.log(payload.new);
          setReadyPlayers(prev => prev + 1)
     }).subscribe()
+
 
   return (
     <h2>{readyPlayers}/{totalPlayers} jugadores listos</h2>

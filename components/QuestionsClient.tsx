@@ -23,6 +23,8 @@ function QuestionsClient({question,code,player}:{question:question,code:string,p
 
         let {data} = await axios.post('/api/confirm-answer', {option,code,player});
 
+        console.log(data);
+
         if (option === 1) setSelScted(1)
         else if (option === 2) setSelScted(2)
         else if (option === 3) setSelScted(3)

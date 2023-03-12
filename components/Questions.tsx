@@ -27,7 +27,6 @@ function Questions() {
     supabase
     .channel('*')
     .on('postgres_changes', { event: '*', schema: '*',table: 'questions_games' }, async payload => {
-        console.log(payload);
         res = await getInfo()
     }).subscribe()
     

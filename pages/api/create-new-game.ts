@@ -35,10 +35,11 @@ export default async function createNewGame(
         let questions_games:questions_games = {
             created_at: new Date(),
             question_id: Math.floor(Math.random() * 16) + 5,
-            game_id: game.id
+            game_id: game.id,
+            answered_count: 0
         }
 
-        const qg = await supabase
+        await supabase
             .from("questions_games")
             .insert(questions_games)
             .select()

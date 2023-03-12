@@ -14,6 +14,16 @@ export type player_game = {
     place: number
 }
 
+export type model_player_game = {
+    id:string,
+    game:string,
+    username:string,
+    created_at:string,
+    isReady: boolean,
+    place: number,
+    games: game
+}
+
 export type game_player_game = {
     id:string,
     created_at:string,
@@ -46,7 +56,8 @@ export type questions_games = {
     id?: number,
     created_at: Date,
     question_id: number,
-    game_id: string
+    game_id: string,
+    answered_count?: number
 }
 
 export type token = {

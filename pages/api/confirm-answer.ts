@@ -16,6 +16,7 @@ export default async function joinGame(
    }
 
     try {
+
         let { data, error } = await supabase
             .from("games")
             .select("*, players_games (*), questions_games(*)")
@@ -25,8 +26,20 @@ export default async function joinGame(
             
         if (error) res.status(500).json(error);
         if (data == null) return;
-
+        
         let [ game ] = data
+
+        let player_answer = await supabase.from("players_questions")
+            .select("*, questions_games(*)")
+            .eq('question',game.questions_games[0].id)
+            .eq('player',game.players_games[0].id)
+
+        if (player_answer.data == undefined) return
+            
+        if (player_answer.data.length > 0) {
+            res.status(200).json({"message": "The player already chose an answer"});
+            return;
+        }
 
         if (game.questions_games.length == 0) {
             res.status(200).json({"message":"todos respondieron la pregunta"});
@@ -42,13 +55,6 @@ export default async function joinGame(
             .eq('player',player_question.player)
 
         if( players_questions.data == undefined) return;
-
-        // TODO: cheeck if theres no players left to answer
-        
-        if (players_questions.data?.length > 0) {
-            res.status(200).json({"message": "The player already chose an answer"});
-            return;
-        }
 
         await supabase
             .from("players_questions")
