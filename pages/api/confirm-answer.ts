@@ -37,12 +37,12 @@ export default async function joinGame(
         if (player_answer.data == undefined) return
             
         if (player_answer.data.length > 0) {
-            res.status(200).json({"message": "The player already chose an answer"});
+            res.status(208).json({"message": "The player already chose an answer"});
             return;
         }
 
         if (game.questions_games.length == 0) {
-            res.status(200).json({"message":"todos respondieron la pregunta"});
+            res.status(208).json({"message":"todos respondieron la pregunta"});
             return;
         }
 
