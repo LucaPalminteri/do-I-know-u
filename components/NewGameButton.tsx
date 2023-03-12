@@ -24,7 +24,10 @@ function NewGameButton() {
 
   
   async function startGame() {
-    if (username.length < 4) return;
+    if (username.length < 4) {
+      alert('El nombre no llega a la cantidad minima de caracteres')
+      return;
+    }
 
     setIsLoading(true)
     let {data} = await axios.get('/api/create-new-game',{params: {username}})
@@ -41,7 +44,7 @@ function NewGameButton() {
 
   return (
     <div className='new-game'>
-      <h2 onClick={toggleView}>Nuevo juego</h2>
+      <h2 className='option-main' onClick={toggleView}>Nuevo juego</h2>
       {isLoading && <Loader show={true} />}
       {view ? 
       <div  className={`new-game-input-container `}>
