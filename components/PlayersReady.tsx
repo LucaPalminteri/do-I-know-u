@@ -23,6 +23,7 @@ function PlayersReady({players}:{players: Array<player_game> | undefined}) {
     .channel('*')
     .on('postgres_changes', { event: '*', schema: '*',table: 'players_games' }, async (payload:RealtimePostgresChangesPayload<player_game>) => {
          setReadyPlayers(prev => prev + 1)
+         if (totalPlayers == readyPlayers) console.log('reload');
     }).subscribe()
 
 

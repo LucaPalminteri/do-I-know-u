@@ -54,6 +54,7 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
 
+        console.log(code);
         if (code.length < 6) {
             setMessage('El código debe tener 6 letras')
             setShowPopUp(true)
@@ -93,7 +94,7 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
 
             {hasCookie ? <Link href={`/game/${playerCode}`}><h2 onClick={() => setIsLoading(true)}>Continuar juego</h2></Link> :
                 <>
-                    <h2 onClick={toggleView}>Unirme a una partida</h2>
+                    <h2 className='option-main' onClick={toggleView}>Unirme a una partida</h2>
                     {
                         view ?
                             <>
@@ -101,7 +102,6 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
                                     data-aos="fade-right"
                                     data-aos-duration={AOS_DURATION}
                                     type="text"
-                                    required
                                     value={username}
                                     onChange={handleUsernameChange}
                                     maxLength={30}

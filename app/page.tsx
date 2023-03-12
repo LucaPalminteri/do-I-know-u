@@ -37,7 +37,7 @@ export default function Home() {
       </div>
       <div className='option info'>
         <Link href={'/information'}>
-          <h2>¿Cómo se juega?</h2>
+          <h2 className='option-main'>¿Cómo se juega?</h2>
         </Link>
       </div>
     </main>
