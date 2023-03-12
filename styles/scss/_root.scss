@@ -18,26 +18,6 @@
     }
 
     .option {
-        background-color: #444;
-        margin: 30px 0;
-        padding: 30px;
-        border-radius: $border-radius;
-        transition-duration: 0.2s;
-        width: 260px;
-
-        input {
-            margin-top: 30px;
-        }
-
-        h2 {
-            cursor: pointer;
-            user-select: none;
-
-            &:hover {
-                color: #90ee90;
-            }
-        }
-
         .new-game {
             display: flex;
             flex-direction: column;
@@ -77,6 +57,23 @@
                     text-align: center;
                     margin-top: 0;
                 }
+            }
+        }
+
+        .option-main {
+            background-color: #444;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: $border-radius;
+            transition-duration: 0.2s;
+            width: 260px;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover {
+                background-color: #ffd700;
+                color: #000;
+                transform: scale(1.05);
             }
         }
     }

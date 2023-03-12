@@ -57,6 +57,40 @@
 
             // }
 
+            .questions {
+                h2 {
+                    margin-bottom: 40px;
+                    padding: 60px 0;
+                    font-size: 26px;
+                    border-radius: $border-radius;
+                    transition-duration: .2s;
+
+                    &:hover {
+                        background-color: lightgreen;
+                        color: #000;
+                        transform: scale(1.01);
+                    }
+                }
+
+                .btn-option {
+                    transition-duration: .2s;
+                    padding: 20px;
+                    font-size: 18px;
+                    margin: 15px 0;
+
+                    &:hover {
+                        background-color: #ffd700;
+                        color: #000;
+                        transform: scale(1.01);
+                    }
+
+                    &:focus {
+                        background-color: lightgreen;
+                        color: #000;
+                    }
+                }
+            }
+
             .wait-confirmation {
                 button {
                     margin-top: 50px;

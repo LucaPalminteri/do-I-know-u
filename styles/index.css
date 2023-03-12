@@ -234,26 +234,6 @@ button.popup-close:hover {
 .root header h1 {
   padding: 20px;
 }
-.root .option {
-  background-color: #444;
-  margin: 30px 0;
-  padding: 30px;
-  border-radius: 5px;
-  transition-duration: 0.2s;
-  width: 260px;
-}
-.root .option input {
-  margin-top: 30px;
-}
-.root .option h2 {
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-}
-.root .option h2:hover {
-  color: #90ee90;
-}
 .root .option .new-game {
   display: flex;
   flex-direction: column;
@@ -287,6 +267,23 @@ button.popup-close:hover {
   width: 130px;
   text-align: center;
   margin-top: 0;
+}
+.root .option .option-main {
+  background-color: #444;
+  margin: 30px 0;
+  padding: 30px;
+  border-radius: 5px;
+  transition-duration: 0.2s;
+  width: 260px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.root .option .option-main:hover {
+  background-color: #ffd700;
+  color: #000;
+  transform: scale(1.05);
 }
 
 @keyframes show {
@@ -324,6 +321,33 @@ button.popup-close:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.game-room main .do-i-knou-you .questions h2 {
+  margin-bottom: 40px;
+  padding: 60px 0;
+  font-size: 26px;
+  border-radius: 5px;
+  transition-duration: 0.2s;
+}
+.game-room main .do-i-knou-you .questions h2:hover {
+  background-color: lightgreen;
+  color: #000;
+  transform: scale(1.01);
+}
+.game-room main .do-i-knou-you .questions .btn-option {
+  transition-duration: 0.2s;
+  padding: 20px;
+  font-size: 18px;
+  margin: 15px 0;
+}
+.game-room main .do-i-knou-you .questions .btn-option:hover {
+  background-color: #ffd700;
+  color: #000;
+  transform: scale(1.01);
+}
+.game-room main .do-i-knou-you .questions .btn-option:focus {
+  background-color: lightgreen;
+  color: #000;
 }
 .game-room main .do-i-knou-you .wait-confirmation button {
   margin-top: 50px;
