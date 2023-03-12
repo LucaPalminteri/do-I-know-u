@@ -4,33 +4,23 @@ import { question } from '@/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from 'axios';
-
-const AOS_DURATION:number = 500
-const AOS_MAX_DELAY:number = 2800
-const DELAY_BETWEEN:number = 100
-const AOS_ANIMATION:string = "zoom-in-down"
+import supabase from '@/utils/supabase';
 
 function QuestionsClient({question,code,player}:{question:question,code:string,player:string}) {
+
+    supabase
+    .channel('*')
+    .on('postgres_changes', { event: '*', schema: '*',table: 'questions_games' }, async (payload) => {
+        console.log(payload);
+    }).subscribe()
 
     useEffect(() => {
         AOS.init();
         AOS.refresh();
       }, []);
 
-      const [selected, setSelScted] = useState(0)
-
     const handleAnswer = async (value: string | null, option:number) => {
-
         let {data} = await axios.post('/api/confirm-answer', {option,code,player});
-
-        console.log(data);
-
-        if (option === 1) setSelScted(1)
-        else if (option === 2) setSelScted(2)
-        else if (option === 3) setSelScted(3)
-        else if (option === 4) setSelScted(4)
-        else if (option === 5) setSelScted(5)
-        else return;
     }
   return (
     <main>
