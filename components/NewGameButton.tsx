@@ -30,7 +30,9 @@ function NewGameButton() {
     }
 
     setIsLoading(true)
-    let {data} = await axios.get('/api/create-new-game',{params: {username}})
+    let {data,request} = await axios.get('/api/create-new-game',{params: {username}})
+    console.log(data);
+    console.log(request);
     router.push(`/game/${data}`)
   }
 

@@ -12,6 +12,17 @@ export async function getPlayers(gameId:string) {
     return data;
 }
 
+export async function getGame(code: string) {
+    let { data } = await supabase
+    .from("games")
+    .select("*, players_games (*)")
+    .eq("code", `${code}`);
+
+    if (data == null || data == undefined) return [];
+
+    return data[0];
+}
+
 export async function getPlayerAnswer(questionID: string, playerID: string) {
     let { data } = await supabase.from("players_questions")
     .select("*, questions_games(*)")
@@ -80,12 +91,30 @@ export async function insertPlayerGame(gameID: string, username: string) {
     return data[0];
 }
 
-export async function insertQuestionGame(questionGame: questions_games) {
-    let { data } = await supabase
+export async function insertQuestionGame(questionGame:any) {
+    console.log(questionGame);
+    let { data, error } = await supabase
     .from("questions_games")
     .insert(questionGame)
 
+    console.log({data,error});
     if (data == null || data == undefined) return;
+
+    return data[0]
+}
+
+// UPDATE Functions
+
+export async function updatePlayersCountInGame(playersCount: number, code: string) {
+    let { data } = await supabase
+    .from("games")
+    .update({ players_count: playersCount })
+    .eq("code", `${code}`)
+    .select();
+
+    if (data == null || data == undefined) return;
+
+    return data[0];
 }
 
 // DELETE Functions
