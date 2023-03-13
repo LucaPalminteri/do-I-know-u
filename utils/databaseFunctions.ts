@@ -12,6 +12,17 @@ export async function getPlayers(gameId:string) {
     return data;
 }
 
+export async function getGame(code:string) {
+    let res = await supabase
+        .from("games")
+        .select("*, players_games (*)")
+        .eq("code", `${code}`);
+
+    if(res == null || res.error) return null;
+
+    return res.data[0];
+}
+
 export async function getPlayerAnswer(questionID: string, playerID: string) {
     let { data } = await supabase.from("players_questions")
     .select("*, questions_games(*)")
@@ -88,20 +99,35 @@ export async function insertQuestionGame(questionGame: questions_games) {
     if (data == null || data == undefined) return;
 }
 
+// UPDATE Functions
+
+export async function updatePlayersCountInGame(playersCount: number, code: string) {
+    let { data } = await supabase
+        .from("games")
+        .update({ players_count: playersCount })
+        .eq("code", `${code}`)
+        .select();
+
+    if (data == null || data == undefined) return null;
+
+   // return data[0]
+}
+
+
 // DELETE Functions
 
 export async function deletePlayerQuestion(playerID: string) {
-    await supabase.from("players_questions").delete().eq("player", playerID);
+    await supabase.from("players_questions").delete().eq("player", playerID)
 }
 
 export async function deletePlayerGame(playerID: string) {
-    await supabase.from("players_questions").delete().eq("player", playerID);
+    await supabase.from("players_games").delete().eq("id", playerID)
 }
 
 export async function deleteQuestionGame(gameID: string) {
-    await supabase.from("questions_games").delete().eq("game_id", gameID);
+    await supabase.from("questions_games").delete().eq("game_id", gameID)
 }
 
 export async function deleteGame(gameID: string) {
-    await supabase.from("games").delete().eq("id", gameID);
+    await supabase.from("games").delete().eq("id", gameID)
 }

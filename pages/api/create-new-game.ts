@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createToken } from "@/utils/token";
-
 import { player_game, questions_games } from "@/types/types";
 import { getRandomCode, insertGame, insertPlayerGame, insertQuestionGame } from "@/utils/databaseFunctions";
 import { QuestionGame } from "@/classes/QuestionGame";
