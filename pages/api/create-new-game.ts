@@ -12,13 +12,10 @@ export default async function createNewGame(req: NextApiRequest,res: NextApiResp
     try {
         let game = await insertGame(code)
 
-        if (game == null) {
-            res.status(500).json({error: 'error'});
-            return;
-        }
+        if (game == null) return;
 
         let playerGame:player_game = await insertPlayerGame(game.id,username)
-        let questionGame:questions_games = new QuestionGame(game.id,playerGame)
+        let questionGame:questions_games = new QuestionGame(game.id,playerGame.place)
 
         await insertQuestionGame(questionGame)
         
