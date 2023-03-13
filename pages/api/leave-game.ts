@@ -2,11 +2,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
 import { player_game } from "@/types/types";
 import { deleteToken } from "@/utils/token";
+import { deleteGame, deletePlayerGame, deletePlayerQuestion, deleteQuestionGame } from "@/utils/databaseFunctions";
 
-export default async function joinGame(
-    req: NextApiRequest,
-    res: NextApiResponse<Object | null>
-) {
+export default async function joinGame(req: NextApiRequest,res: NextApiResponse<Object | null>) {
     let { code, username } = req.body;
 
     try {
@@ -29,12 +27,14 @@ export default async function joinGame(
             .eq("code", `${code}`)
             .select();
 
-        await supabase.from("players_questions").delete().eq("player", player[0].id);
-        await supabase.from("players_games").delete().eq("id", player[0].id);
+        await deletePlayerQuestion(player[0].id)
+        await deletePlayerGame(player[0].id)
 
-        if (players_count != null && game.players_count <= 1) {
-            await supabase.from("questions_games").delete().eq("game_id", game.id);
-            await supabase.from("games").delete().eq("id", game.id);
+        let noPlayersLeft = players_count != null && game.players_count <= 1
+        
+        if (noPlayersLeft) {
+            await deleteQuestionGame(game.id)
+            await deleteGame(game.id)
         }
 
         let serialized: string = deleteToken()

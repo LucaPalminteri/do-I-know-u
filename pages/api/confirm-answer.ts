@@ -1,19 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
-import { player_question, model_player_question, questions_games } from "@/types/types";
+import { player_question } from "@/types/types";
+import { getPlayerAnswer, getPlayers, getPlayersQuestions, insertPlayerQuestion } from "@/utils/databaseFunctions";
 
-export default async function joinGame(
-    req: NextApiRequest,
-    res: NextApiResponse<Object | null>
-) {
+export default async function joinGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
     let { option, code, player } = req.body
-
-    let player_question:player_question = {
-        created_at: new Date(),
-        player: '',
-        question: 0,
-        option
-   }
 
     try {
 
@@ -29,36 +20,23 @@ export default async function joinGame(
         
         let [ game ] = data
 
-        let player_answer = await supabase.from("players_questions")
-            .select("*, questions_games(*)")
-            .eq('question',game.questions_games[0].id)
-            .eq('player',game.players_games[0].id)
-
-        if (player_answer.data == undefined) return
+        let player_answer = await getPlayerAnswer(game.questions_games[0].id, game.players_games[0].id)
             
-        if (player_answer.data.length > 0) {
+        if (player_answer.length > 0) {
             res.status(208).json({"message": "The player already chose an answer"});
             return;
         }
 
-        if (game.questions_games.length == 0) {
-            res.status(208).json({"message":"todos respondieron la pregunta"});
-            return;
-        }
+        let player_question:player_question = {
+            created_at: new Date(),
+            player: game.players_games[0].id,
+            question: game.questions_games[0].id,
+            option
+       }
 
-        player_question.player = game.players_games[0].id;
-        player_question.question = game.questions_games[0].id
+        let players_questions = await getPlayersQuestions(player_question.player)
 
-        let players_questions = await supabase
-            .from('players_questions')
-            .select()
-            .eq('player',player_question.player)
-
-        if( players_questions.data == undefined) return;
-
-        await supabase
-            .from("players_questions")
-            .insert(player_question)
+        await insertPlayerQuestion(player_question)
 
         await supabase
         .from('questions_games')
@@ -78,9 +56,11 @@ export default async function joinGame(
                 .update({isReady:true})
                 .eq('id',game.questions_games[0].id)
 
+            let players = await getPlayers(game.id)
+
             await supabase
                 .from('questions_games')
-                .insert({game_id:game.id,question_id: Math.floor(Math.random() * 16) + 5})
+                .insert({game_id:game.id,question_id: Math.floor(Math.random() * 16) + 5,player_turn:'2ad11d4b-fb26-4b84-8b77-516ee4d7e56d'})
         }
         
         res.status(200).json(data);

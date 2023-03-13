@@ -15,7 +15,7 @@ function QuestionsClient({question,code,player}:{question:question,code:string,p
     supabase
     .channel('*')
     .on('postgres_changes', { event: '*', schema: '*',table: 'questions_games' }, async (payload) => {
-        console.log(payload);
+        //console.log(payload);
     }).subscribe()
 
     useEffect(() => {

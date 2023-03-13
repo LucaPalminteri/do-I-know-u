@@ -5,10 +5,7 @@ import { createToken } from "@/utils/token";
 
 const MAX_COUNT_PLAYERS = 7;
 
-export default async function joinGame(
-    req: NextApiRequest,
-    res: NextApiResponse<Object | null>
-) {
+export default async function joinGame(req: NextApiRequest,res: NextApiResponse<Object | null>) {
     let { code, username } = req.body;
 
     try {
@@ -20,9 +17,15 @@ export default async function joinGame(
         if (error) res.status(500).json(error);
         
         if (data == null) return;
-        if (data.length == 0) res.status(400).json(data);
+        if (data.length == 0) {
+            res.status(204).json({message: 'no se encontro un juego con el codigo ingresado'});
+        }
         
         let [ game ] = data
+
+        if (game.hasStarted) {
+            res.status(201).json({message: 'No puede unirse al juego porque ya esta en curso'})
+        }
 
         let usernames: Array<string> = game.players_games.map(
             (player: player_game): string => player.username

@@ -4,7 +4,6 @@ import supabase from "@/utils/supabase";
 import LeaveGameButton from "@/components/LeaveGameButton";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-import WebcamComponent from "@/components/Webcam";
 import CopyCode from "@/components/CopyCode";
 import UserList from "@/components/UserList";
 import HomeLink from "@/components/HomeLink";
@@ -44,7 +43,6 @@ export default function RootLayout({
 
             <main>
                 {children}
-                {false && <WebcamComponent/>}
             </main>
 
             <aside className="desktop-aside">
@@ -54,8 +52,6 @@ export default function RootLayout({
                 <div className="players">
                     <ol><UserList players_games={res?.players_games} username={token.username}/></ol>
                 </div>
-
-                {/* <Cronometer /> */}
                 
                 <div className="code">
                     <CopyCode code={token.code}/>

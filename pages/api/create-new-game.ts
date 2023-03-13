@@ -1,13 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import supabase from "@/utils/supabase";
 import { createToken } from "@/utils/token";
-
 import { questions_games } from "@/types/types";
+import { getRandomCode, insertGame, insertPlayerGame, insertQuestionGame } from "@/utils/databaseFunctions";
 
-export default async function createNewGame(
-    req: NextApiRequest,
-    res: NextApiResponse<Object | null>
-) {
+export default async function createNewGame(req: NextApiRequest,res: NextApiResponse<Object | null>) {
     let code: string = getRandomCode();
     let username: string = String(req.query.username); 
 
@@ -15,51 +11,22 @@ export default async function createNewGame(
     res.setHeader("Set-Cookie", serialized);
 
     try {
-        let { data, error } = await supabase
-            .from("games")
-            .insert({ code })
-            .select();
+        let game = await insertGame(code)
 
-        if (data == null || error) {
-            res.status(500).json(error);
-            return;
-        }
-
-        let [ game ] = data
-
-        await supabase
-            .from("players_games")
-            .insert({ game: game.id, username,place:1 })
-            .select();
+        let player_game = await insertPlayerGame(game.id, username)
 
         let questions_games:questions_games = {
             created_at: new Date(),
             question_id: Math.floor(Math.random() * 16) + 5,
             game_id: game.id,
-            answered_count: 0
+            answered_count: 0,
+            player_turn: player_game.data[0].id
         }
 
-        await supabase
-            .from("questions_games")
-            .insert(questions_games)
-            .select()
+        await insertQuestionGame(questions_games)
 
         res.status(200).json(game.code);
     } catch (error) {
-        res.status(200).json({ data: "error" });
+        res.status(500).json({ error });
     }
-}
-
-export function getRandomCode():string 
-{
-    let code:string = ""
-    let charASCII:number = 0
-
-    for (let i = 0; i < 6; i++) 
-    {
-        charASCII = Math.floor(Math.random() * 25) + 65
-        code += String.fromCharCode(charASCII)
-    }
-
-    return code
 }
