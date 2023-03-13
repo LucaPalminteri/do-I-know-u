@@ -57,7 +57,8 @@ export type questions_games = {
     created_at: Date,
     question_id: number,
     game_id: string,
-    answered_count?: number
+    answered_count?: number,
+    player_turn?: string
 }
 
 export type token = {

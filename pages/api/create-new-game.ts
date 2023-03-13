@@ -1,65 +1,32 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import supabase from "@/utils/supabase";
 import { createToken } from "@/utils/token";
 
-import { questions_games } from "@/types/types";
+import { player_game, questions_games } from "@/types/types";
+import { getRandomCode, insertGame, insertPlayerGame, insertQuestionGame } from "@/utils/databaseFunctions";
+import { QuestionGame } from "@/classes/QuestionGame";
 
-export default async function createNewGame(
-    req: NextApiRequest,
-    res: NextApiResponse<Object | null>
-) {
+export default async function createNewGame(req: NextApiRequest,res: NextApiResponse<Object | null>) {
     let code: string = getRandomCode();
     let username: string = String(req.query.username); 
 
-    let serialized = createToken(username,code)
-    res.setHeader("Set-Cookie", serialized);
-
     try {
-        let { data, error } = await supabase
-            .from("games")
-            .insert({ code })
-            .select();
+        let game = await insertGame(code)
 
-        if (data == null || error) {
-            res.status(500).json(error);
+        if (game == null) {
+            res.status(500).json({error: 'error'});
             return;
         }
 
-        let [ game ] = data
+        let playerGame:player_game = await insertPlayerGame(game.id,username)
+        let questionGame:questions_games = new QuestionGame(game.id,playerGame)
 
-        await supabase
-            .from("players_games")
-            .insert({ game: game.id, username,place:1 })
-            .select();
-
-        let questions_games:questions_games = {
-            created_at: new Date(),
-            question_id: Math.floor(Math.random() * 16) + 5,
-            game_id: game.id,
-            answered_count: 0
-        }
-
-        await supabase
-            .from("questions_games")
-            .insert(questions_games)
-            .select()
+        await insertQuestionGame(questionGame)
+        
+        let serialized = createToken(username,code)
+        res.setHeader("Set-Cookie", serialized);
 
         res.status(200).json(game.code);
     } catch (error) {
         res.status(200).json({ data: "error" });
     }
-}
-
-export function getRandomCode():string 
-{
-    let code:string = ""
-    let charASCII:number = 0
-
-    for (let i = 0; i < 6; i++) 
-    {
-        charASCII = Math.floor(Math.random() * 25) + 65
-        code += String.fromCharCode(charASCII)
-    }
-
-    return code
 }
