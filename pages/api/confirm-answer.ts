@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
 import { PlayerQuestion } from "@/classes/QuestionGame";
-import { getGameAndPlayerGame, getPlayersQuestionsByQuestionAndPlayer, insertPlayerGame, insertPlayerQuestion } from "@/utils/databaseFunctions";
+import { getGameAndPlayerGame, getPlayers, getPlayersQuestionsByQuestionAndPlayer, insertPlayerGame, insertPlayerQuestion } from "@/utils/databaseFunctions";
 import { game_question_game } from "@/types/types";
 
 
