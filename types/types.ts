@@ -12,7 +12,8 @@ export type player_game = {
     created_at:string,
     isReady: boolean,
     place: number,
-    points?: number
+    points: number
+
 }
 
 export type model_player_game = {
@@ -59,7 +60,7 @@ export type questions_games = {
     question_id: number,
     game_id: string,
     answered_count?: number,
-    player_turn?: string
+    player_turn?: number
 }
 
 export type token = {
@@ -69,7 +70,7 @@ export type token = {
 
 export type player_question = {
     id?:number,
-    created_at:Date,
+    created_at?:Date,
     player:string,
     question:number,
     option:number
@@ -83,4 +84,24 @@ export type model_player_question = {
     hasStarted:boolean,
     players_games: player_game,
     questions_games: questions_games
+}
+
+export type game_question_game = {
+    id:string,
+    created_at:string,
+    players_count:number,
+    code:string,
+    hasStarted:boolean,
+    question_game: questions_games,
+    players_games: player_game
+}
+
+export type class_game_question_game = {
+    id:string,
+    created_at:string,
+    players_count:number,
+    code:string,
+    hasStarted:boolean,
+    players_games: Array<player_game>,
+    questions_games: Array<questions_games>,
 }
