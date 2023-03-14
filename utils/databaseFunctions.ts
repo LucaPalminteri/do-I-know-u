@@ -1,3 +1,4 @@
+import { GameQuestionGame } from "@/classes/GameQuestionGame";
 import { player_question, questions_games } from "@/types/types";
 import supabase from "./supabase";
 
@@ -45,7 +46,7 @@ export async function getPlayersQuestions(playerID: string) {
     return data;
 }
 
-export async function getPlayersQuestionsByQuestionAndPlayer(questionID: string, playerID:string) {
+export async function getPlayersQuestionsByQuestionAndPlayer(questionID: number, playerID:string) {
     let { data, error } = await supabase
     .from("players_questions")
     .select("*, questions_games(*)")
@@ -72,13 +73,31 @@ export function getRandomCode():string
     return code
 }
 
+export async function getGameAndPlayerGame(code: string, player:string) {
+    let { data, error } = await supabase
+    .from("games")
+    .select("*, players_games (*), questions_games(*)")
+    .eq('code', code)
+    .eq('players_games.username', player)
+    .eq('questions_games.isReady', false)
+    
+    if (data == null || data == undefined) return null;
+
+    let gameQuestionGame = new GameQuestionGame(data)
+
+
+    return gameQuestionGame;
+}
+
 // INSERT Functions
 
 export async function insertPlayerQuestion(playerQuestion: player_question) {
-    let { data } = await supabase
+    let { data,error } = await supabase
     .from("players_questions")
     .insert(playerQuestion)
+    .select()
 
+    console.log({data,error});
     if (data == null || data == undefined) return;
 }
 
