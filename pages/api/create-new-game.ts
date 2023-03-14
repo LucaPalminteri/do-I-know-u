@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createToken } from "@/utils/token";
+
 import { player_game, questions_games } from "@/types/types";
 import { getRandomCode, insertGame, insertPlayerGame, insertQuestionGame } from "@/utils/databaseFunctions";
 import { QuestionGame } from "@/classes/QuestionGame";
+
 
 export default async function createNewGame(req: NextApiRequest,res: NextApiResponse<Object | null>) {
     let code: string = getRandomCode();
@@ -21,8 +23,9 @@ export default async function createNewGame(req: NextApiRequest,res: NextApiResp
         let serialized = createToken(username,code)
         res.setHeader("Set-Cookie", serialized);
 
+
         res.status(200).json(game.code);
     } catch (error) {
-        res.status(200).json({ data: "error" });
+        res.status(500).json({ error });
     }
 }

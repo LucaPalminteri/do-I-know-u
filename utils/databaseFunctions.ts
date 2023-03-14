@@ -97,7 +97,6 @@ export async function insertPlayerQuestion(playerQuestion: player_question) {
     .insert(playerQuestion)
     .select()
 
-    console.log({data,error});
     if (data == null || data == undefined) return;
 }
 

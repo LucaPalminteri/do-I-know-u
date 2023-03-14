@@ -6,7 +6,6 @@ import axios from 'axios';
 import PopUp from './PopUpMessage';
 import Loader from './Loader';
 import Link from 'next/link';
-import Cookies from 'js-cookie'
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -54,7 +53,6 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
 
-        console.log(code);
         if (code.length < 6) {
             setMessage('El código debe tener 6 letras')
             setShowPopUp(true)
@@ -68,7 +66,18 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
         }
         setIsLoading(true)
 
-        let { data } = await axios.post('/api/join-game', { code, username })
+        let { data,status } = await axios.post('/api/join-game', { code, username })
+
+        if (status == 204) {
+            alert(data.message)
+            setIsLoading(false)
+
+        }
+        if (status == 201) {
+            alert(data.message)
+            setIsLoading(false)
+            return;
+        }
 
         if (data.error != null) {
             setIsLoading(false)

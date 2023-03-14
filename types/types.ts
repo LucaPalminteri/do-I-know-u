@@ -13,6 +13,7 @@ export type player_game = {
     isReady: boolean,
     place: number,
     points: number
+
 }
 
 export type model_player_game = {

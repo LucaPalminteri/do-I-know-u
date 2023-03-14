@@ -12,9 +12,9 @@ async function getInfo() {
             .eq('isReady',false)
 
         if (data == null) return;
-        let [questions_games] = data
+
         
-        return questions_games.questions;
+        return data[0].questions;
     } catch (error) { 
         console.error(error);
         return {}
@@ -23,13 +23,6 @@ async function getInfo() {
 
 function Questions() {
     let {code, player} = getTokenInfo()
-    
-    supabase
-    .channel('*')
-    .on('postgres_changes', { event: '*', schema: '*',table: 'questions_games' }, async payload => {
-        res = await getInfo()
-    }).subscribe()
-    
     let res: question = use(getInfo());
 
   return (

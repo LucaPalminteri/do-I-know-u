@@ -2,8 +2,6 @@ import React, { use } from "react";
 import Questions from "@/components/Questions";
 import WaitConfirmation from "@/components/WaitConfirmation";
 import supabase from "@/utils/supabase";
-import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
-import { game } from "@/types/types";
 import { getTokenInfo } from "@/utils/Functions";
 import { redirect } from 'next/navigation';
 
