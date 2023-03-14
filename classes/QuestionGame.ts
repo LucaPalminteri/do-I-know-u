@@ -15,7 +15,6 @@ export class QuestionGame
 
 export class PlayerQuestion 
 {
-    created_at =  new Date();
     player:string;
     question:number;
     option:number;
