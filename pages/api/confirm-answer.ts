@@ -1,42 +1,32 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
-import { player_question, model_player_question, questions_games } from "@/types/types";
+import { PlayerQuestion } from "@/classes/QuestionGame";
+import { getPlayersQuestionsByQuestionAndPlayer } from "@/utils/databaseFunctions";
+import { game_player_game, game_question_game } from "@/types/types";
 
-export default async function joinGame(
-    req: NextApiRequest,
-    res: NextApiResponse<Object | null>
-) {
+export default async function joinGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
     let { option, code, player } = req.body
-
-    let player_question:player_question = {
-        created_at: new Date(),
-        player: '',
-        question: 0,
-        option
-   }
 
     try {
 
-        let { data, error } = await supabase
-            .from("games")
-            .select("*, players_games (*), questions_games(*)")
-            .eq('code',code)
-            .eq('players_games.username',player)
-            .eq('questions_games.isReady',false)
+        let game:any = await getGameAndPlayerGame(code, player)
+        // console.log(asa);
+        // let { data, error } = await supabase
+        //     .from("games")
+        //     .select("*, players_games (*), questions_games(*)")
+        //     .eq('code',code)
+        //     .eq('players_games.username',player)
+        //     .eq('questions_games.isReady',false)
             
-        if (error) res.status(500).json(error);
-        if (data == null) return;
+        // if (error) res.status(500).json(error);
+        // if (data == null) return;
         
-        let [ game ] = data
+        // let [ game ] = data
+        let player_answer = await getPlayersQuestionsByQuestionAndPlayer(game.questions_games[0].id, game.players_games[0].id)
 
-        let player_answer = await supabase.from("players_questions")
-            .select("*, questions_games(*)")
-            .eq('question',game.questions_games[0].id)
-            .eq('player',game.players_games[0].id)
-
-        if (player_answer.data == undefined) return
+        if (player_answer == undefined) return
             
-        if (player_answer.data.length > 0) {
+        if (player_answer.length > 0) {
             res.status(208).json({"message": "The player already chose an answer"});
             return;
         }
@@ -46,19 +36,11 @@ export default async function joinGame(
             return;
         }
 
-        player_question.player = game.players_games[0].id;
-        player_question.question = game.questions_games[0].id
-
-        let players_questions = await supabase
-            .from('players_questions')
-            .select()
-            .eq('player',player_question.player)
-
-        if( players_questions.data == undefined) return;
+        let playerQuestion = new PlayerQuestion(game.players_games[0].id, game.questions_games[0].id, option) 
 
         await supabase
             .from("players_questions")
-            .insert(player_question)
+            .insert(playerQuestion)
 
         await supabase
         .from('questions_games')
@@ -83,8 +65,30 @@ export default async function joinGame(
                 .insert({game_id:game.id,question_id: Math.floor(Math.random() * 16) + 5})
         }
         
-        res.status(200).json(data);
+        res.status(200).json(game);
     } catch (error) {
         res.status(500).json({ error });
     }
+}
+
+export async function getGameAndPlayerGame(code: string, player:string) {
+    let { data, error } = await supabase
+    .from("games")
+    .select("*, players_games (*), questions_games(*)")
+    .eq('code', code)
+    .eq('players_games.username', player)
+    .eq('questions_games.isReady', false)
+
+    if (data == null || data == undefined) return [];
+
+    let game:game_question_game = {
+        id: data[0].id,
+        created_at: data[0].created_at,
+        players_count: data[0].player_count,
+        code: data[0].code,
+        hasStarted: data[0].hasStarted,
+        players_games: data[0].players_games[0],
+        question_game: data[0].questions_games[0]
+    }
+    return game;
 }

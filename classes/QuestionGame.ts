@@ -12,3 +12,18 @@ export class QuestionGame
         this.player_turn = playerTurn;
     }
 }
+
+export class PlayerQuestion 
+{
+    created_at =  new Date();
+    player:string;
+    question:number;
+    option:number;
+
+    constructor(player:string, question:number, option:number)
+    {
+        this.player = player;
+        this.question = question;
+        this.option = option
+    }
+}

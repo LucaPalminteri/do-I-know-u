@@ -45,6 +45,19 @@ export async function getPlayersQuestions(playerID: string) {
     return data;
 }
 
+export async function getPlayersQuestionsByQuestionAndPlayer(questionID: string, playerID:string) {
+    let { data, error } = await supabase
+    .from("players_questions")
+    .select("*, questions_games(*)")
+    .eq('question', questionID)
+    .eq('player', playerID)
+
+    if (data == null || data == undefined) return [];
+
+    console.log({data,error});
+    return data;
+}
+
 export function getRandomCode():string 
 {
     let code:string = ""
