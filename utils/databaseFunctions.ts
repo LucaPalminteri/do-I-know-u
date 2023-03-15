@@ -133,15 +133,29 @@ export async function insertQuestionGame(questionGame: questions_games) {
 // UPDATE Functions
 
 export async function updatePlayersCountInGame(playersCount: number, code: string) {
-    let { data } = await supabase
+    await supabase
         .from("games")
         .update({ players_count: playersCount })
         .eq("code", `${code}`)
-        .select();
+}
 
-    if (data == null || data == undefined) return null;
+export async function updateReadinessQuestionGame(gameID: number | undefined) {
+    let { data, error } = await supabase  
+        .from('questions_games')
+        .update({isReady:true})
+        .eq('id', gameID)
+        .select()
+    
+    if (data == null) return null;
+    
+    return data[0]
+}
 
-   // return data[0]
+export async function updateAnsweredCountInQuestionsGames(answeredCount: number, gameID: number | undefined) {
+    await supabase
+        .from('questions_games')
+        .update({answered_count: answeredCount})
+        .eq('id', gameID)
 }
 
 
