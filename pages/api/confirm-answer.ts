@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
 import { PlayerQuestion } from "@/classes/QuestionGame";
 import { getGameAndPlayerGame, getPlayers, getPlayersQuestionsByQuestionAndPlayer, insertPlayerQuestion, updateAnsweredCountInQuestionsGames, updateReadinessQuestionGame } from "@/utils/databaseFunctions";
-import { game, game_question_game, player_game, questions_games } from "@/types/types";
+import { game_question_game, player_game, questions_games } from "@/types/types";
 
 export default async function joinGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
     let { option, code, player } = req.body
