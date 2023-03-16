@@ -1,14 +1,13 @@
-import React, { use } from "react";
 import Questions from "@/components/Questions";
 import WaitConfirmation from "@/components/WaitConfirmation";
-import supabase from "@/utils/supabase";
 import { getTokenInfo } from "@/utils/Functions";
+import supabase from "@/utils/supabase";
 import { redirect } from 'next/navigation';
 
 async function getInfo() {  
-    let {code, player} = getTokenInfo()
+    let {code} = getTokenInfo()
     try {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from("games")
             .select('hasStarted')
             .eq('code',code)
@@ -24,10 +23,10 @@ async function getInfo() {
     }
 }
 
-function Code() {
+async function Code() {
 
-    let res = use(getInfo())
-
+    let res = await getInfo()
+    let questions = await Questions()
     supabase
     .channel('*')
     .on('postgres_changes', { event: '*', schema: '*',table: 'games' }, async (payload) => {
@@ -39,7 +38,7 @@ function Code() {
         <div className="do-i-knou-you">
             {
                 res ?
-                <Questions/>
+                <>{questions}</>
                 :
                 <WaitConfirmation />
             }

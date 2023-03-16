@@ -21,7 +21,7 @@ async function getInfo() {
     }
 }
 
-async function Questions() {
+async function Questions():Promise<JSX.Element> {
     let {code, player} = getTokenInfo()
 
     let res = await getInfo()
