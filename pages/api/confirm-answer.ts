@@ -1,16 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import supabase from "@/utils/supabase";
 import { PlayerQuestion } from "@/classes/QuestionGame";
-import { getGameAndPlayerGame, getPlayers, getPlayersQuestionsByQuestionAndPlayer, insertPlayerGame, insertPlayerQuestion } from "@/utils/databaseFunctions";
-import { game_question_game } from "@/types/types";
-
+import { getGameAndPlayerGame, getPlayers, getPlayersQuestionsByQuestionAndPlayer, insertPlayerQuestion, updateAnsweredCountInQuestionsGames, updateReadinessQuestionGame } from "@/utils/databaseFunctions";
+import { game_question_game, player_game, questions_games } from "@/types/types";
 
 export default async function joinGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
     let { option, code, player } = req.body
 
     try {
-
-
         let game:game_question_game | null = await getGameAndPlayerGame(code, player)
 
         if (game == null || game == undefined) return;
@@ -27,11 +24,7 @@ export default async function joinGame(req: NextApiRequest, res: NextApiResponse
 
         await insertPlayerQuestion(playerQuestion)
 
-
-        await supabase
-        .from('questions_games')
-        .update({answered_count: game.question_game.answered_count + 1})
-        .eq('id', game.question_game.id)
+        await updateAnsweredCountInQuestionsGames(game.question_game.answered_count + 1, game.question_game.id)
 
         if (game.players_count - 1 == game.question_game.answered_count) {
 
@@ -41,20 +34,23 @@ export default async function joinGame(req: NextApiRequest, res: NextApiResponse
                 newQuestion = Math.floor(Math.random() * 16) + 5
             }
 
-            await supabase  
-                .from('questions_games')
-                .update({isReady:true})
-                .eq('id',game.question_game.id)
+            let questionGame:questions_games = await updateReadinessQuestionGame(game.question_game.id)
 
             let players = await getPlayers(game.id)
 
+            const playersSortedByPlace = players?.sort((a:player_game, b:player_game) => a.place - b.place);
+
+            let nextPlayer:player_game = playersSortedByPlace?.find((player:player_game) => player.place > questionGame.player_turn )
+
+            if (questionGame.player_turn == playersSortedByPlace?.at(-1).place)  nextPlayer = playersSortedByPlace[0]
+
             await supabase
                 .from('questions_games')
-                .insert({game_id:game.id,question_id: Math.floor(Math.random() * 16) + 5,player_turn:'2ad11d4b-fb26-4b84-8b77-516ee4d7e56d'})
+                .insert({game_id:game.id,question_id: newQuestion, player_turn:nextPlayer.place})
         }
         
         res.status(200).json(game);
     } catch (error) {
         res.status(500).json({ error });
     }
-}
+} 

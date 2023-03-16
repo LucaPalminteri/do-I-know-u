@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { question } from '@/types/types'
+import { player_game, question } from '@/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from 'axios';
@@ -8,7 +8,7 @@ import supabase from '@/utils/supabase';
 import { CircularProgress } from '@mui/material';
 
 
-function QuestionsClient({question,code,player}:{question:question,code:string,player:string}) {
+function QuestionsClient({question,code,player,playerTurn}:{question:question,code:string,player:string,playerTurn:player_game | undefined}) {
 
     const [hasAnswered, setHasAnswered] = useState(false)
 
@@ -35,6 +35,7 @@ function QuestionsClient({question,code,player}:{question:question,code:string,p
     }
   return (
     <main>
+        <h3>{playerTurn?.username}</h3>
         <h2
         >{question.question}</h2>
         {
