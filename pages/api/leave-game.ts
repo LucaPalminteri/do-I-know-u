@@ -1,25 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import supabase from "@/utils/supabase";
-import { player_game } from "@/types/types";
+import { game_player_game, player_game } from "@/types/types";
 import { deleteToken } from "@/utils/token";
+
 import { deleteGame, deletePlayerGame, deletePlayerQuestion, deleteQuestionGame, getGame, updatePlayersCountInGame } from "@/utils/databaseFunctions";
 
-export default async function joinGame(req: NextApiRequest,res: NextApiResponse<Object | null>) {
+export default async function joinGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
+
     let { code, username } = req.body;
 
     try {
-        let game = await getGame(code)
-        if (game.length == 0) res.status(400).json(game);
+        let game:game_player_game = await getGame(code)
+            
 
-        let player = game.players_games.filter((player: player_game) => player.username == username);
-        let players_count = await updatePlayersCountInGame(game.players_count - 1,code)
+        if (game == null) return;
+        if (game == undefined) res.status(400).json(game);
 
-        await deletePlayerQuestion(player[0].id)
-        await deletePlayerGame(player[0].id)
+        let [ playerID ] = game.players_games.map((player: player_game) => player.username == username ? player.id : '' );
 
-        let noPlayersLeft = players_count != null && game.players_count <= 1
+        await updatePlayersCountInGame(game.players_count - 1, code)
+        await deletePlayerQuestion(playerID)
+        await deletePlayerGame(playerID)
         
-        if (noPlayersLeft) {
+        if (game.players_count <= 1) {
+
             await deleteQuestionGame(game.id)
             await deleteGame(game.id)
         }

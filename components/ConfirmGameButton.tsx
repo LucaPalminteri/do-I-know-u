@@ -1,9 +1,13 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import supabase from '@/utils/supabase';
 import { PostgrestResponse } from '@supabase/supabase-js';
 import { player_game,model_player_game } from '@/types/types';
+import { CircularProgress } from '@mui/material';
+
 function ConfirmGameButton({gameId,username}:{gameId:string|undefined,username:string}) {
+
+    const [isReady, setIsReady] = useState(false)
 
     const handleReady = async () => {
         try {
@@ -35,17 +39,26 @@ function ConfirmGameButton({gameId,username}:{gameId:string|undefined,username:s
                     .eq('id',gameId)
             }
             
-                
+            setIsReady(true)
     
         } catch (error) { 
             console.error(error);
             return {}
         }
     }
-  return (
-    <button
-        onClick={handleReady}
-    >Estoy listo</button>
+    return (
+    <>
+    {
+        isReady ?
+        <>
+            <h2>Esperando jugadores</h2>
+            <CircularProgress/> 
+        </> :
+        <button
+            onClick={handleReady}
+        >Estoy listo</button>
+    }
+    </>
   )
 }
 
