@@ -1,8 +1,9 @@
 import React, {use} from 'react'
 import supabase from '@/utils/supabase'
-import { question } from '@/types/types';
+import { game_player_game, player_game, question } from '@/types/types';
 import QuestionsClient from './QuestionsClient';
 import { getTokenInfo } from '@/utils/Functions';
+import { getGame, getPlayers, getPlayerTurn, getQuestionsGames } from '@/utils/databaseFunctions';
 
 async function getInfo() {  
     try {
@@ -13,7 +14,6 @@ async function getInfo() {
 
         if (data == null) return;
 
-        
         return data[0].questions;
     } catch (error) { 
         console.error(error);
@@ -21,13 +21,19 @@ async function getInfo() {
     }
 }
 
-function Questions() {
+async function Questions() {
     let {code, player} = getTokenInfo()
-    let res: question = use(getInfo());
+
+    let res = await getInfo()
+    
+    let game:game_player_game = await getGame(code)
+    let players = game.players_games 
+    let playerTurnNumber:number = await getPlayerTurn(game.id)
+    let playerTurn = players.find( (player:player_game) => player.place == playerTurnNumber)
 
   return (
     <div className='questions'>
-        <QuestionsClient question={res} code={code} player={player}/>
+        <QuestionsClient question={res} code={code} player={player} playerTurn={playerTurn}/>
     </div>
   )
 }
