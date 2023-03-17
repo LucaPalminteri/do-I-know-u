@@ -1,5 +1,5 @@
 import { GameQuestionGame } from "@/classes/GameQuestionGame";
-import { player_question, questions_games } from "@/types/types";
+import { player_question } from "@/types/types";
 import supabase from "./supabase";
 
 // GET Functions
