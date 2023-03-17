@@ -16,15 +16,15 @@ async function getInfo(code: string) {
             .select(`*, players_games (*)`)
             .eq("code", code);
         if (data == null) return;
-        let [ game ] = data
+        let [game] = data
         return game;
     } catch (error) { }
 }
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode
 }) {
 
     const nextCookies = cookies();
@@ -37,31 +37,31 @@ export default function RootLayout({
 
     let res = use(getInfo(token.code));
 
-  return (
-    <div>
-      <div className="game-room">
+    return (
+        <div>
+            <div className="game-room">
 
-            <main>
-                {children}
-            </main>
+                <main>
+                    {children}
+                </main>
 
-            <aside className="desktop-aside">
-                <div>
-                    <HomeLink/>
-                </div>
-                <div className="players">
-                    <ol><UserList players_games={res?.players_games} username={token.username}/></ol>
-                </div>
-                
-                <div className="code">
-                    <CopyCode code={token.code}/>
-                    <ShareButton code={token.code} />
-                    <LeaveGameButton code={token.code} username={token.username}/>
-                </div>
-            </aside>
-            <AsideMobile code={token.code} username={token.username}/>
+                <aside className="desktop-aside">
+                    <div>
+                        <HomeLink />
+                    </div>
+                    <div className="players">
+                        <ol><UserList players_games={res?.players_games} username={token.username} /></ol>
+                    </div>
 
+                    <div className="code">
+                        <CopyCode code={token.code} />
+                        <ShareButton code={token.code} />
+                        <LeaveGameButton code={token.code} username={token.username} />
+                    </div>
+                </aside>
+                <AsideMobile code={token.code} username={token.username} />
+
+            </div>
         </div>
-    </div>
-  )
+    )
 }

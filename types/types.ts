@@ -1,15 +1,15 @@
 export type game = {
-    id:string,
-    created_at:string,
-    players_count:number,
-    code:string
+    id: string,
+    created_at: string,
+    players_count: number,
+    code: string
 }
 
 export type player_game = {
-    id:string,
-    game:string,
-    username:string,
-    created_at:string,
+    id: string,
+    game: string,
+    username: string,
+    created_at: string,
     isReady: boolean,
     place: number,
     points: number
@@ -17,26 +17,26 @@ export type player_game = {
 }
 
 export type model_player_game = {
-    id:string,
-    game:string,
-    username:string,
-    created_at:string,
+    id: string,
+    game: string,
+    username: string,
+    created_at: string,
     isReady: boolean,
     place: number,
     games: game
 }
 
 export type game_player_game = {
-    id:string,
-    created_at:string,
-    players_count:number,
-    code:string,
-    players_games:Array<player_game>
+    id: string,
+    created_at: string,
+    players_count: number,
+    code: string,
+    players_games: Array<player_game>
 }
 
 export type question = {
-    id:string,
-    created_at:string,
+    id: string,
+    created_at: string,
     question: string,
     option_1: string,
     option_2: string,
@@ -64,44 +64,44 @@ export type questions_games = {
 }
 
 export type token = {
-    code:string,
-    player:string
+    code: string,
+    player: string
 }
 
 export type player_question = {
-    id?:number,
-    created_at?:Date,
-    player:string,
-    question:number,
-    option:number
+    id?: number,
+    created_at?: Date,
+    player: string,
+    question: number,
+    option: number
 }
 
 export type model_player_question = {
     id: string,
-    created_at:Date,
-    players_count:number,
+    created_at: Date,
+    players_count: number,
     code: string,
-    hasStarted:boolean,
+    hasStarted: boolean,
     players_games: player_game,
     questions_games: questions_games
 }
 
 export type game_question_game = {
-    id:string,
-    created_at:string,
-    players_count:number,
-    code:string,
-    hasStarted:boolean,
+    id: string,
+    created_at: string,
+    players_count: number,
+    code: string,
+    hasStarted: boolean,
     question_game: questions_games,
     players_games: player_game
 }
 
 export type class_game_question_game = {
-    id:string,
-    created_at:string,
-    players_count:number,
-    code:string,
-    hasStarted:boolean,
+    id: string,
+    created_at: string,
+    players_count: number,
+    code: string,
+    hasStarted: boolean,
     players_games: Array<player_game>,
     questions_games: Array<questions_games>,
 }

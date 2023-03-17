@@ -2,13 +2,13 @@ import { cookies } from 'next/headers';
 import jwt from "jsonwebtoken";
 import { token } from '@/types/types';
 
-export function getTokenInfo():token {
+export function getTokenInfo(): token {
 
     const nextCookies = cookies();
     const cookie = nextCookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!);
 
     if (cookie != undefined) {
-        let token:any = jwt.verify(
+        let token: any = jwt.verify(
             String(cookie?.value),
             String(process.env.NEXT_PUBLIC_TOKEN_NAME)
         );
@@ -18,5 +18,5 @@ export function getTokenInfo():token {
             player: token.username
         }
     }
-    else return {code:'',player:''}
+    else return { code: '', player: '' }
 }

@@ -57,7 +57,6 @@ a {
 }
 
 .information {
-
     h1 {
         margin-top: 40px;
     }
@@ -68,13 +67,11 @@ a {
 }
 
 @media screen and (max-width: 800px) {
-
     body {
         margin-top: 6dvh;
     }
 
     .information {
-    
         p {
             padding: 10px;
         }
@@ -109,7 +106,7 @@ a {
             font-size: 30px;
 
             &:active {
-                transform: scale(.9);
+                transform: scale(0.9);
             }
         }
     }

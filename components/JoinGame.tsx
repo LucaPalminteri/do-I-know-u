@@ -66,7 +66,7 @@ export default function JoinGame({ hasCookie, playerCode }: { hasCookie: boolean
         }
         setIsLoading(true)
 
-        let { data,status } = await axios.post('/api/join-game', { code, username })
+        let { data, status } = await axios.post('/api/join-game', { code, username })
 
         if (status == 204) {
             alert(data.message)

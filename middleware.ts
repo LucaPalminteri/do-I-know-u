@@ -3,31 +3,31 @@ import type { NextRequest } from 'next/server'
 import supabase from './utils/supabase'
 
 export async function middleware(request: NextRequest) {
-  
-  let code = request.nextUrl.pathname.slice(6,12)
 
-  if(request.nextUrl.pathname.length == 5) return NextResponse.next()
+    let code = request.nextUrl.pathname.slice(6, 12)
 
-  try {
-    const { data, error} = await supabase.from('games').select().eq('code',`${code}`)
+    if (request.nextUrl.pathname.length == 5) return NextResponse.next()
 
-    //TODO: validar si se conectan a una sala que este llena
+    try {
+        const { data, error } = await supabase.from('games').select().eq('code', `${code}`)
 
-    // si se ingresa un codigo por URL que no existe en la base de datos lo redirige al inicio
-    if (data?.length == 0) {
-      return NextResponse.redirect(new URL('/', request.url))
+        //TODO: validar si se conectan a una sala que este llena
+
+        // si se ingresa un codigo por URL que no existe en la base de datos lo redirige al inicio
+        if (data?.length == 0) {
+            return NextResponse.redirect(new URL('/', request.url))
+        }
+
+        // todo ok
+        if (data != null && code == data[0].code) {
+            return NextResponse.next();
+        }
+    } catch (error) {
     }
 
-    // todo ok
-    if (data != null && code == data[0].code) {
-      return NextResponse.next();
-    }
-  } catch (error) {
-  }
-
-  return NextResponse.next()
+    return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/game/:code*']
+    matcher: ['/game/:code*']
 }

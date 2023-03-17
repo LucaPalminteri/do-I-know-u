@@ -5,17 +5,17 @@ import React from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
-function LeaveGameButton({code,username}:{code:string,username: string}) {
+function LeaveGameButton({ code, username }: { code: string, username: string }) {
 
     let route = useRouter()
 
     async function handleClick() {
-        await axios.post('/api/leave-game',{code,username})
+        await axios.post('/api/leave-game', { code, username })
         route.push('/')
     }
-  return (
-    <button onClick={handleClick}><LogoutIcon style={{marginRight: 10}}/>Abandonar partida</button>
-  )
+    return (
+        <button onClick={handleClick}><LogoutIcon style={{ marginRight: 10 }} />Abandonar partida</button>
+    )
 }
 
 export default LeaveGameButton

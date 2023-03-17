@@ -7,39 +7,39 @@ import React from 'react';
 
 export default function Home() {
 
-  const nextCookies = cookies();
-  const cookie = nextCookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!);
+    const nextCookies = cookies();
+    const cookie = nextCookies.get(process.env.NEXT_PUBLIC_TOKEN_PUBLIC_NAME!);
 
-  let hasCookie: boolean = cookie != undefined
+    let hasCookie: boolean = cookie != undefined
 
-  let playerUsername = "", playerCode = ''
+    let playerUsername = "", playerCode = ''
 
-  if (hasCookie) {
-    let token:any = jwt.verify(
-        String(cookie?.value),
-        String(process.env.NEXT_PUBLIC_TOKEN_NAME)
-    );
+    if (hasCookie) {
+        let token: any = jwt.verify(
+            String(cookie?.value),
+            String(process.env.NEXT_PUBLIC_TOKEN_NAME)
+        );
 
-    playerCode = token.code
-  }
+        playerCode = token.code
+    }
 
-  return (
-    <main className='root'>
-      <header>
-        <h1>Te conozco?</h1>
-      </header>
+    return (
+        <main className='root'>
+            <header>
+                <h1>Te conozco?</h1>
+            </header>
 
-      <div className='option'>
-        <NewGameButton/>
-      </div>
-      <div className='option'>
-         <JoinGame playerCode={playerCode} hasCookie={hasCookie}/>
-      </div>
-      <div className='option info'>
-        <Link href={'/information'}>
-          <h2 className='option-main'>¿Cómo se juega?</h2>
-        </Link>
-      </div>
-    </main>
-  )
+            <div className='option'>
+                <NewGameButton />
+            </div>
+            <div className='option'>
+                <JoinGame playerCode={playerCode} hasCookie={hasCookie} />
+            </div>
+            <div className='option info'>
+                <Link href={'/information'}>
+                    <h2 className='option-main'>¿Cómo se juega?</h2>
+                </Link>
+            </div>
+        </main>
+    )
 }

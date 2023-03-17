@@ -5,7 +5,7 @@ import { createToken } from "@/utils/token";
 
 const MAX_COUNT_PLAYERS = 7;
 
-export default async function joinGame(req: NextApiRequest,res: NextApiResponse<Object | null>) {
+export default async function joinGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
     let { code, username } = req.body;
 
     try {
@@ -15,16 +15,16 @@ export default async function joinGame(req: NextApiRequest,res: NextApiResponse<
             .eq("code", `${code}`);
 
         if (error) res.status(500).json(error);
-        
+
         if (data == null) return;
         if (data.length == 0) {
-            res.status(204).json({message: 'no se encontro un juego con el codigo ingresado'});
+            res.status(204).json({ message: 'no se encontro un juego con el codigo ingresado' });
         }
-        
-        let [ game ] = data
+
+        let [game] = data
 
         if (game.hasStarted) {
-            res.status(201).json({message: 'No puede unirse al juego porque ya esta en curso'})
+            res.status(201).json({ message: 'No puede unirse al juego porque ya esta en curso' })
         }
 
         let usernames: Array<string> = game.players_games.map(
@@ -50,16 +50,16 @@ export default async function joinGame(req: NextApiRequest,res: NextApiResponse<
             .update({ players_count: game.players_count + 1 })
             .eq("code", `${code}`);
 
-        let maxPlace:player_game = game.players_games.reduce( (max:player_game, obj:player_game):player_game => {
-            return obj.place > max.place? obj : max;
-          });
+        let maxPlace: player_game = game.players_games.reduce((max: player_game, obj: player_game): player_game => {
+            return obj.place > max.place ? obj : max;
+        });
 
         await supabase
             .from("players_games")
             .insert({ game: game.id, username, place: maxPlace.place + 1 })
 
-        if(req.headers.cookie == undefined) {
-            let serialized = createToken(username,code)
+        if (req.headers.cookie == undefined) {
+            let serialized = createToken(username, code)
             res.setHeader("Set-Cookie", serialized);
         }
 

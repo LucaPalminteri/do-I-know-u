@@ -35,7 +35,7 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
     }
   return (
     <main>
-        <h3>{playerTurn?.username}</h3>
+        <h3 className='player-turn'>{playerTurn?.username}</h3>
         <h2
         >{question.question}</h2>
         {

@@ -39,23 +39,6 @@
         align-items: center;
 
         .do-i-knou-you {
-            // animation-name: show;
-            // animation-duration: 3s;
-            // animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
-            // position: relative;
-
-            // h1 {
-            //     animation-name: show-title;
-            //     animation-duration: 3s;
-            //     animation-timing-function: cubic-bezier(0.28, 0.68, 0.83, 0);
-            //     opacity: 0;
-            //     position: absolute;
-            //     top: auto;
-            //     left: auto;
-            //     right: auto;
-            //     bottom: auto;
-
-            // }
 
             .questions {
                 h2 {
@@ -63,7 +46,7 @@
                     padding: 60px 0;
                     font-size: 26px;
                     border-radius: $border-radius;
-                    transition-duration: .2s;
+                    transition-duration: 0.2s;
 
                     &:hover {
                         background-color: lightgreen;
@@ -73,7 +56,7 @@
                 }
 
                 .btn-option {
-                    transition-duration: .2s;
+                    transition-duration: 0.2s;
                     padding: 20px;
                     font-size: 18px;
                     margin: 15px 0;
@@ -105,8 +88,6 @@
         position: relative;
         left: 0;
         background-color: $secondary-dark-color;
-
-        
 
         .players {
             //outline: 3px solid #ffd700;
@@ -166,7 +147,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         header {
             display: flex;
             justify-content: space-around;
@@ -191,9 +172,7 @@
 }
 
 @media screen and (max-width: 1200px) {
-
     .game-room {
-
         .desktop-aside {
             display: none;
         }
@@ -202,8 +181,8 @@
 
 @media screen and (min-width: 1200px) {
     .game-room {
-            .mobile-aside {
-                display: none;
-            }
+        .mobile-aside {
+            display: none;
+        }
     }
 }
