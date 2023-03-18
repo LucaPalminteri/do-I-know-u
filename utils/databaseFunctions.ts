@@ -24,6 +24,23 @@ export async function getGame(code: string) {
     return res.data[0];
 }
 
+export async function getStartedGame(code: string) {
+    try {
+        const { data } = await supabase
+            .from("games")
+            .select('hasStarted')
+            .eq('code', code)
+
+        if (data == null) return;
+        let [game] = data
+
+        return game.hasStarted;
+    } catch (error) {
+        console.error(error);
+        return {}
+    }
+}
+
 export async function getPlayerAnswer(questionID: string, playerID: string) {
     let { data } = await supabase.from("players_questions")
         .select("*, questions_games(*)")
@@ -107,6 +124,23 @@ export async function getPlayerTurn(gameID: string) {
     if (data == null || data == undefined) return null;
 
     return data[0].player_turn;
+}
+
+export async function getRoundPoints() {
+    try {
+        let { data, error } = await supabase
+            .from("questions_games ")
+            .select("*, players_questions (*)")
+            .eq('isReady', true)
+            .order('id', {ascending: false})
+            .limit(1)
+
+            if (data == null) return []
+        return data[0]
+    }
+    catch (error) {
+        console.error(error)
+    }
 }
 
 // INSERT Functions
