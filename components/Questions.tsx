@@ -31,6 +31,8 @@ async function Questions(): Promise<JSX.Element> {
     let playerTurnNumber: number = await getPlayerTurn(game.id)
     let playerTurn = players.find((player: player_game) => player.place == playerTurnNumber)
 
+    // TODO: Create logic to retrieve the answer of each player and display the points 
+
     return (
         <div className='questions'>
             <QuestionsClient question={res} code={code} player={player} playerTurn={playerTurn} />
