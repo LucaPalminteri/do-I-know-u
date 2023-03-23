@@ -10,8 +10,8 @@ async function Code() {
     let res = await getStartedGame(code)
     let questions = await Questions()
 
-    console.log(responses);
-
+    // TODO: Create logic to retrieve the answer of each player and display the points
+     
     return (
         <div className="do-i-knou-you">
             {
