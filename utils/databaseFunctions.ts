@@ -72,7 +72,6 @@ export async function getPlayersQuestionsByQuestionAndPlayer(questionID: number,
 
     if (data == null || data == undefined) return [];
 
-    console.log({ data, error });
     return data;
 }
 
@@ -126,11 +125,11 @@ export async function getPlayerTurn(gameID: string) {
     return data[0].player_turn;
 }
 
-export async function getRoundPoints() {
+export async function getRoundPoints(gameID?: string) {
     try {
         let { data, error } = await supabase
             .from("questions_games ")
-            .select("*, players_questions (*)")
+            .select("*, players_questions (*,  players_games(place))")
             .eq('isReady', true)
             .order('id', {ascending: false})
             .limit(1)
