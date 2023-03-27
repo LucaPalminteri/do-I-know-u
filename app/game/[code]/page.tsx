@@ -14,6 +14,7 @@ async function Code() {
 
     let playerTurn = responses.players_questions.find((player:any) => player.players_games.place == responses.player_turn)
     let options = responses.player_questions.map( (player:any) => {
+        // see if the answer of each player matches the answer of the player in turn
         if(player.option == playerTurn.option) {
             console.log('add each');
         }
