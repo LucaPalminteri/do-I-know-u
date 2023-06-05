@@ -1,26 +1,32 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { player_game, question } from '@/types/types'
+import { game, player_game, question, questions_games } from '@/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from 'axios';
 import supabase from '@/utils/supabase';
 import { CircularProgress } from '@mui/material';
+import { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
+import { useRouter } from "next/navigation";
+import { getGame } from '@/utils/databaseFunctions';
 
 
 function QuestionsClient({question,code,player,playerTurn}:{question:question,code:string,player:string,playerTurn:player_game | undefined}) {
+    const router = useRouter();
 
     const [hasAnswered, setHasAnswered] = useState(false)
-
-    supabase
-    .channel('*')
-    .on('postgres_changes', { event: '*', schema: '*',table: 'questions_games' }, async (payload) => {
-        //console.log(payload);
-    }).subscribe()
+    const [game, setGame] = useState<game>()
 
     useEffect(() => {
         AOS.init();
         AOS.refresh();
+
+        async function setCurrentGame() {
+            setGame(await getGame(code))
+        }
+
+        setCurrentGame()
+
       }, []);
 
     const handleAnswer = async (value: string | null, option:number) => {
@@ -33,6 +39,33 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
             setHasAnswered(true)
         }
     }
+
+    supabase
+        .channel('*')
+        .on(
+            'postgres_changes', 
+            { 
+                event: '*', 
+                schema: '*', 
+                table: 'questions_games' 
+            }, 
+            async (payload: RealtimePostgresChangesPayload<questions_games>) => {
+                let question_game:questions_games = payload.new
+
+                console.log({answ:question_game.answered_count,coun:game?.players_count});
+                if (question_game.answered_count == game?.players_count)
+                {
+                    setHasAnswered(true)
+                    router.replace(`/game/${code}`);
+                }
+                else {
+                    console.log({else: question_game});
+                    setHasAnswered(false)
+                }
+            }
+        )
+        .subscribe()
+
   return (
     <main>
         <h3 className='player-turn'>{playerTurn?.username}</h3>

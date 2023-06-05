@@ -4,9 +4,10 @@ import supabase from '@/utils/supabase';
 import { PostgrestResponse } from '@supabase/supabase-js';
 import { player_game, model_player_game } from '@/types/types';
 import { CircularProgress } from '@mui/material';
+import Router from "next/router";
 
 function ConfirmGameButton({ gameId, username }: { gameId: string | undefined, username: string }) {
-
+    
     const [isReady, setIsReady] = useState(false)
 
     const handleReady = async () => {
@@ -25,6 +26,10 @@ function ConfirmGameButton({ gameId, username }: { gameId: string | undefined, u
                 .eq('game', gameId)
                 .eq('isReady', true)
 
+            await supabase
+                .from('games')
+                .update({player_ready: game.data != null ? game.data[0].games.player_ready + 1 : 0})
+                .eq('code', game.data != null ? game.data[0].games.code : '')
 
             if (game.data == null || players.data == null) return;
 
@@ -40,6 +45,7 @@ function ConfirmGameButton({ gameId, username }: { gameId: string | undefined, u
             }
 
             setIsReady(true)
+            Router.reload();
 
         } catch (error) {
             console.error(error);
