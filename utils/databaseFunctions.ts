@@ -24,6 +24,17 @@ export async function getGame(code: string) {
     return res.data[0];
 }
 
+export async function getGameByID(gameID: string) {
+    let res = await supabase
+        .from("games")
+        .select("*, players_games (*)")
+        .eq("id", `${gameID}`);
+
+    if (res == null || res.error) return;
+
+    return res.data[0];
+}
+
 export async function getStartedGame(code: string) {
     try {
         const { data } = await supabase
@@ -176,12 +187,10 @@ export async function insertPlayerGame(gameID: string, username: string) {
 }
 
 export async function insertQuestionGame(questionGame: any) {
-    console.log(questionGame);
     let { data, error } = await supabase
         .from("questions_games")
         .insert(questionGame)
 
-    console.log({ data, error });
     if (data == null || data == undefined) return;
 
     return data[0]
