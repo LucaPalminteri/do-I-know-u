@@ -2,7 +2,8 @@ export type game = {
     id: string,
     created_at: string,
     players_count: number,
-    code: string
+    code: string,
+    player_ready: number
 }
 
 export type player_game = {
@@ -60,7 +61,8 @@ export type questions_games = {
     question_id: number,
     game_id: string,
     answered_count?: number,
-    player_turn: number
+    player_turn: number,
+    isReady: boolean
 }
 
 export type token = {
