@@ -30,8 +30,9 @@ function PlayersReady({ players }: { players: Array<player_game> | undefined }) 
                 schema: '*', 
                 table: 'games' 
             }, 
-            async (payload: RealtimePostgresChangesPayload<game>) => {
-                let game:game = payload.new
+            async (payload: any) => {
+                let game: game = payload.new
+
                 setTotalPlayers(game.players_count)
                 setReadyPlayers(game.player_ready)
 

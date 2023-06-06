@@ -6,7 +6,6 @@ import "aos/dist/aos.css";
 import axios from 'axios';
 import supabase from '@/utils/supabase';
 import { CircularProgress } from '@mui/material';
-import { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 import { useRouter } from "next/navigation";
 import { getGame } from '@/utils/databaseFunctions';
 
@@ -49,18 +48,14 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
                 schema: '*', 
                 table: 'questions_games' 
             }, 
-            async (payload: RealtimePostgresChangesPayload<questions_games>) => {
-                let question_game:questions_games = payload.new
+            async (payload: any) => {
+                let question_game: questions_games = payload.new
 
-                console.log({answ:question_game.answered_count,coun:game?.players_count});
-                if (question_game.answered_count == game?.players_count)
+                if (question_game.answered_count == game?.players_count && question_game.isReady)
                 {
-                    setHasAnswered(true)
-                    router.replace(`/game/${code}`);
-                }
-                else {
-                    console.log({else: question_game});
+                    await calculateResults(playerTurn, game);
                     setHasAnswered(false)
+                    router.replace(`/game/${code}/result`);
                 }
             }
         )
@@ -107,3 +102,32 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
 }
 
 export default QuestionsClient
+
+async function calculateResults(playerTurn: player_game | undefined, game: game | undefined)
+{
+    // I need to know what player is in turn
+
+    // With that player I need to know the option selected
+
+    // Then I need to add 1 for each same response
+
+    // eg: 
+    /*
+        turn: player1
+        players: player1, player2, player3, player4, player5 
+        option player in turn: 4
+        options:
+            player2: 2
+            player3: 4
+            player4: 5
+            player5: 4
+
+        RESULTS
+
+        player1: 2
+        player2: 0
+        player3: 1
+        player4: 0
+        player5: 1
+    */   
+}
