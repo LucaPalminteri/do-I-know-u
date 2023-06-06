@@ -106,9 +106,7 @@ export default QuestionsClient
 async function calculateResults(playerTurn: player_game | undefined, game: game | undefined)
 {
     // I need to know what player is in turn
-
     // With that player I need to know the option selected
-
     // Then I need to add 1 for each same response
 
     // eg: 

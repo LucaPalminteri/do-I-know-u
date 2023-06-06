@@ -18,8 +18,6 @@ function Cronometer() {
         }, 1000)
     }, [])
 
-
-
     return (
         <div className='cronometer'>{String(min).padStart(2, '0')}:{String(sec).padStart(2, '0')}</div>
     )
