@@ -1,20 +1,20 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { game, player_game, question, questions_games } from '@/types/types'
+import { game, game_player_game, player_game, player_question, question, questions_games } from '@/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from 'axios';
 import supabase from '@/utils/supabase';
 import { CircularProgress } from '@mui/material';
 import { useRouter } from "next/navigation";
-import { getGame } from '@/utils/databaseFunctions';
+import { getGame, getLastPlayersQuestions, getPlayersQuestions, getPlayersQuestionsByQuestion } from '@/utils/databaseFunctions';
 
 
 function QuestionsClient({question,code,player,playerTurn}:{question:question,code:string,player:string,playerTurn:player_game | undefined}) {
     const router = useRouter();
 
     const [hasAnswered, setHasAnswered] = useState(false)
-    const [game, setGame] = useState<game>()
+    const [game, setGame] = useState<game_player_game>()
 
     useEffect(() => {
         AOS.init();
@@ -103,14 +103,34 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
 
 export default QuestionsClient
 
-async function calculateResults(playerTurn: player_game | undefined, game: game | undefined)
+async function calculateResults(playerTurn: player_game | undefined, game: game_player_game | undefined)
 {
     // I need to know what player is in turn
 
     // With that player I need to know the option selected
 
-    // Then I need to add 1 for each same response
+    let playerQuestion:player_question  = await getLastPlayersQuestions(playerTurn?.id ?? '')
+    let option = playerQuestion.option
 
+    // Then I need to add 1 for each same response
+    game?.players_games.forEach((x)=>{
+        console.log("player:")
+        console.log(x)
+    })
+
+
+    let response:Array<player_question> = await getPlayersQuestionsByQuestion(playerQuestion.question)
+    
+    console.log("response")
+    console.log(response)
+
+    response.forEach((x)=>{
+        console.log("")
+        console.log(x.option)
+        console.log("is equal to")
+        console.log(option)
+        console.log("")
+    })
     // eg: 
     /*
         turn: player1

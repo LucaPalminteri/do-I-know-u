@@ -5,10 +5,6 @@ import { useSearchParams, usePathname  } from 'next/navigation';
 import { game } from '@/types/types';
 import { getGame } from '@/utils/databaseFunctions';
 
-async function getGameAsync(code:string) {
-  await getGame(code)
-}
-
 function ResultView() {
 
   let [code, setCode] = useState<string>(usePathname()?.split('/')[2] ?? '')
@@ -21,7 +17,6 @@ function ResultView() {
     getGameAsync(code)
   }, [])
   
-
   
   return (
     <div>
@@ -33,6 +28,8 @@ function ResultView() {
       <p>player_ready: {game?.player_ready ?? 'loading...'}</p>
       <p>players_count: {game?.players_count ?? 'loading...'}</p>
       <p>hasStarted: {game?.hasStarted ?? 'loading...'}</p>
+
+      <button>ready</button>
     </div>
   )
 }

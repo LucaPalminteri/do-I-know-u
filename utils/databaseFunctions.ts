@@ -74,12 +74,36 @@ export async function getPlayersQuestions(playerID: string) {
     return data;
 }
 
+export async function getLastPlayersQuestions(playerID: string) {
+    let { data } = await supabase
+        .from('players_questions')
+        .select()
+        .eq('player', playerID)
+        .limit(1)
+        .order('question', {ascending: false})
+
+    if (data == null || data == undefined) return [];
+
+    return data[0];
+}
+
 export async function getPlayersQuestionsByQuestionAndPlayer(questionID: number, playerID: string) {
     let { data, error } = await supabase
         .from("players_questions")
         .select("*, questions_games(*)")
         .eq('question', questionID)
         .eq('player', playerID)
+
+    if (data == null || data == undefined) return [];
+
+    return data;
+}
+
+export async function getPlayersQuestionsByQuestion(questionID: number) {
+    let { data, error } = await supabase
+        .from("players_questions")
+        .select("*, questions_games(*)")
+        .eq('question', questionID)
 
     if (data == null || data == undefined) return [];
 
