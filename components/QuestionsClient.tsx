@@ -55,7 +55,7 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
                 {
                     await calculateResults(playerTurn, game);
                     setHasAnswered(false)
-                    router.replace(`/game/${code}/result`);
+                    router.push(`/game/${code}/result`);
                 }
             }
         )
