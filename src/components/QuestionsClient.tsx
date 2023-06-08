@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { game, game_player_game, player_game, player_question, question, questions_games } from '@/types/types'
+import { game, game_player_game, player_game, player_question, question, questions_games } from '@/src/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from 'axios';
-import supabase from '@/utils/supabase';
+import supabase from '@/src/utils/supabase';
 import { CircularProgress } from '@mui/material';
 import { useRouter } from "next/navigation";
-import { getGame, getLastPlayersQuestions, getPlayersQuestions, getPlayersQuestionsByQuestion, updatePlayerPoints } from '@/utils/databaseFunctions';
+import { getGame, getLastPlayersQuestions, getPlayersQuestions, getPlayersQuestionsByQuestion, updatePlayerPoints } from '@/src/utils/databaseFunctions';
 
 
 function QuestionsClient({question,code,player,playerTurn}:{question:question,code:string,player:string,playerTurn:player_game | undefined}) {

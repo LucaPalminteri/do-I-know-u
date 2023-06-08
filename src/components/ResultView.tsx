@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, usePathname  } from 'next/navigation';
-import { game } from '@/types/types';
-import { getGame } from '@/utils/databaseFunctions';
+import { game } from '@/src/types/types';
+import { getGame } from '@/src/utils/databaseFunctions';
 
 function ResultView() {
 

@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import jwt from "jsonwebtoken";
-import { token } from '@/types/types';
+import { token } from '@/src/types/types';
 
 export function getTokenInfo(): token {
 

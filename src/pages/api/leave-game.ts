@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { game_player_game, player_game } from "@/types/types";
-import { deleteToken } from "@/utils/token";
-import { deleteGame, deletePlayerGame, deletePlayerQuestion, deleteQuestionGame, getGame, updatePlayersCountInGame } from "@/utils/databaseFunctions";
+import { game_player_game, player_game } from "@/src/types/types";
+import { deleteToken } from "@/src/utils/token";
+import { deleteGame, deletePlayerGame, deletePlayerQuestion, deleteQuestionGame, getGame, updatePlayersCountInGame } from "@/src/utils/databaseFunctions";
 
 export default async function joinGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
 

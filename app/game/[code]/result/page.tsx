@@ -1,6 +1,6 @@
 import React from 'react'
-import supabase from '@/utils/supabase'
-import ResultView from '@/components/ResultView'
+import supabase from '@/src/utils/supabase'
+import ResultView from '@/src/components/ResultView'
 
 function Result() {
   return (

@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import supabase from '@/utils/supabase';
+import supabase from '@/src/utils/supabase';
 import { PostgrestResponse } from '@supabase/supabase-js';
-import { player_game, model_player_game } from '@/types/types';
+import { player_game, model_player_game } from '@/src/types/types';
 import { CircularProgress } from '@mui/material';
 import Router from "next/router";
 

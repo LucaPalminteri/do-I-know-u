@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import JoinGame from '@/components/JoinGame'
+import JoinGame from '@/src/components/JoinGame'
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-import NewGameButton from '@/components/NewGameButton';
+import NewGameButton from '@/src/components/NewGameButton';
 import React from 'react';
 
 export default function Home() {

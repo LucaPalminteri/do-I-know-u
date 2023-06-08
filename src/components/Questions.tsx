@@ -1,9 +1,9 @@
 import React, { use } from 'react'
-import supabase from '@/utils/supabase'
-import { game_player_game, player_game, question } from '@/types/types';
+import supabase from '@/src/utils/supabase'
+import { game_player_game, player_game, question } from '@/src/types/types';
 import QuestionsClient from './QuestionsClient';
-import { getTokenInfo } from '@/utils/Functions';
-import { getGame, getPlayers, getPlayerTurn, getQuestionsGames } from '@/utils/databaseFunctions';
+import { getTokenInfo } from '@/src/utils/Functions';
+import { getGame, getPlayers, getPlayerTurn, getQuestionsGames } from '@/src/utils/databaseFunctions';
 
 async function getInfo() {
     try {

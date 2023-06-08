@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import supabase from '@/utils/supabase';
-import { game, player_game } from '@/types/types';
+import supabase from '@/src/utils/supabase';
+import { game, player_game } from '@/src/types/types';
 import { RealtimeClient, RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 import { useRouter } from "next/navigation";
 

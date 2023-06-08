@@ -1,5 +1,5 @@
-import { GameQuestionGame } from "@/classes/GameQuestionGame";
-import { player_question } from "@/types/types";
+import { GameQuestionGame } from "@/src/classes/GameQuestionGame";
+import { player_question } from "@/src/types/types";
 import supabase from "./supabase";
 
 // GET Functions

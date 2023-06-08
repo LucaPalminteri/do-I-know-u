@@ -1,8 +1,8 @@
 import React, { use } from 'react'
-import supabase from '@/utils/supabase'
-import { getTokenInfo } from '@/utils/Functions';
+import supabase from '@/src/utils/supabase'
+import { getTokenInfo } from '@/src/utils/Functions';
 import { PostgrestResponse, RealtimePostgresChangesPayload } from '@supabase/supabase-js';
-import { game, player_game } from '@/types/types';
+import { game, player_game } from '@/src/types/types';
 import ConfirmGameButton from './ConfirmGameButton';
 import PlayersReady from './PlayersReady';
 
