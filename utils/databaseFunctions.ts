@@ -248,6 +248,13 @@ export async function updateAnsweredCountInQuestionsGames(answeredCount: number,
         .eq('id', gameID)
 }
 
+export async function updatePlayerPoints(playerID:string) {
+    await supabase
+        .from('players_games')
+        .update({ points: 1 })
+        .eq('id', playerID)
+}
+
 // DELETE Functions
 
 export async function deletePlayerQuestion(playerID: string) {

@@ -7,14 +7,14 @@ import axios from 'axios';
 import supabase from '@/utils/supabase';
 import { CircularProgress } from '@mui/material';
 import { useRouter } from "next/navigation";
-import { getGame, getLastPlayersQuestions, getPlayersQuestions, getPlayersQuestionsByQuestion } from '@/utils/databaseFunctions';
+import { getGame, getLastPlayersQuestions, getPlayersQuestions, getPlayersQuestionsByQuestion, updatePlayerPoints } from '@/utils/databaseFunctions';
 
 
 function QuestionsClient({question,code,player,playerTurn}:{question:question,code:string,player:string,playerTurn:player_game | undefined}) {
     const router = useRouter();
 
     const [hasAnswered, setHasAnswered] = useState(false)
-    const [game, setGame] = useState<game_player_game>()
+    const [game, setGame] = useState<game>()
 
     useEffect(() => {
         AOS.init();
@@ -103,7 +103,7 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
 
 export default QuestionsClient
 
-async function calculateResults(playerTurn: player_game | undefined, game: game_player_game | undefined)
+async function calculateResults(playerTurn: player_game | undefined, game: game_player_game | game | undefined)
 {
     // I need to know what player is in turn
 
@@ -111,25 +111,26 @@ async function calculateResults(playerTurn: player_game | undefined, game: game_
 
     let playerQuestion:player_question  = await getLastPlayersQuestions(playerTurn?.id ?? '')
     let option = playerQuestion.option
+    let pointsPlayerTurn = 0
 
     // Then I need to add 1 for each same response
-    game?.players_games.forEach((x)=>{
-        console.log("player:")
-        console.log(x)
-    })
+    // game?.players_games.forEach((x)=>{
+    //     console.log("player:")
+    //     console.log(x)
+    // })
 
 
-    let response:Array<player_question> = await getPlayersQuestionsByQuestion(playerQuestion.question)
-    
-    console.log("response")
-    console.log(response)
+    let playersQuestions:Array<player_question> = await getPlayersQuestionsByQuestion(playerQuestion.question)
 
-    response.forEach((x)=>{
-        console.log("")
-        console.log(x.option)
-        console.log("is equal to")
-        console.log(option)
-        console.log("")
+    playersQuestions.forEach(async (playerQuestion) => {
+        if (playerQuestion.id == playerQuestion.id) {
+            return
+        }
+
+        if (playerQuestion.option == option) {
+            pointsPlayerTurn++
+            await updatePlayerPoints(playerQuestion.player)
+        }
     })
     // eg: 
     /*

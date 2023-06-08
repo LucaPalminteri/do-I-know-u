@@ -3,7 +3,8 @@ export class QuestionGame {
     question_id = Math.floor(Math.random() * 16) + 5;
     game_id: string;
     answered_count = 0;
-    player_turn: number
+    player_turn: number;
+    isReady: boolean = false;
 
     constructor(gameID: string, playerTurn: number) {
         this.game_id = gameID;
