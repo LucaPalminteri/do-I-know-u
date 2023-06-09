@@ -1,5 +1,6 @@
 import { GameQuestionGame } from "@/src/classes/GameQuestionGame";
 import { player_question } from "@/src/types/types";
+import { PostgrestResponse } from "@supabase/supabase-js";
 import supabase from "./supabase";
 
 // GET Functions
@@ -248,10 +249,18 @@ export async function updateAnsweredCountInQuestionsGames(answeredCount: number,
         .eq('id', gameID)
 }
 
-export async function updatePlayerPoints(playerID:string) {
+export async function updatePlayerPoints(playerID:string, points:number | null) {
+
+    let {data}:PostgrestResponse<{ points: number }> = await supabase
+        .from('players_games')
+        .select('points')
+        .eq('id', playerID)
+
+    if(data == null) return
+
     await supabase
         .from('players_games')
-        .update({ points: 1 })
+        .update({ points: points == null ? data[0].points + 1 : points})
         .eq('id', playerID)
 }
 

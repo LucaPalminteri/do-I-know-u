@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams, usePathname  } from 'next/navigation';
 import { game } from '@/src/types/types';
 import { getGame } from '@/src/utils/databaseFunctions';
+import Link from 'next/link';
 
 function ResultView() {
 
@@ -30,6 +31,10 @@ function ResultView() {
       <p>hasStarted: {game?.hasStarted ?? 'loading...'}</p>
 
       <button>ready</button>
+
+      <button>
+        <Link href={`/game/${code}`}>Next</Link>
+      </button>
     </div>
   )
 }

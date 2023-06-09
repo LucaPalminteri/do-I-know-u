@@ -122,16 +122,22 @@ async function calculateResults(playerTurn: player_game | undefined, game: game_
 
     let playersQuestions:Array<player_question> = await getPlayersQuestionsByQuestion(playerQuestion.question)
 
-    playersQuestions.forEach(async (playerQuestion) => {
-        if (playerQuestion.id == playerQuestion.id) {
-            return
-        }
+    playersQuestions.forEach(async (pQuestion) => {
+        console.log(pQuestion)
+        // if (playerQuestion.id == playerQuestion.id) {
+        //     return
+        // }
 
-        if (playerQuestion.option == option) {
-            pointsPlayerTurn++
-            await updatePlayerPoints(playerQuestion.player)
+        if (pQuestion.option == option) {
+            console.log("should update points")
+            pointsPlayerTurn++;
+            await updatePlayerPoints(pQuestion.player,null)
         }
     })
+
+    await updatePlayerPoints(playerQuestion.player,pointsPlayerTurn)
+
+    
     // eg: 
     /*
         turn: player1
