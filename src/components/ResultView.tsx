@@ -3,20 +3,25 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, usePathname  } from 'next/navigation';
 import { game } from '@/src/types/types';
-import { getGame } from '@/src/utils/databaseFunctions';
+import { getGame, getPlayersGames } from '@/src/utils/databaseFunctions';
 import Link from 'next/link';
+import { GameQuestionGame } from '../classes/GameQuestionGame';
 
 function ResultView() {
 
   let [code, setCode] = useState<string>(usePathname()?.split('/')[2] ?? '')
   let [game, setGame] = useState<game>()
+  let [playerQuestion, setPlayerQuestion] = useState<GameQuestionGame | null>()
   
   useEffect(() => {
     async function getGameAsync(code:string) {
       setGame(await getGame(code))
+      setPlayerQuestion(await getPlayersGames(code))
     }
     getGameAsync(code)
   }, [])
+
+  console.log(playerQuestion)
   
   
   return (

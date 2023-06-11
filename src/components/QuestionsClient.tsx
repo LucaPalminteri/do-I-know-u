@@ -131,7 +131,7 @@ async function calculateResults(playerTurn: player_game | undefined, game: game_
         if (pQuestion.option == option) {
             console.log("should update points")
             pointsPlayerTurn++;
-            await updatePlayerPoints(pQuestion.player,null)
+            await updatePlayerPoints(pQuestion.player)
         }
     })
 
