@@ -138,6 +138,18 @@ export async function getGameAndPlayerGame(code: string, player: string) {
     return gameQuestionGame;
 }
 
+export async function getPlayersGames(code: string | undefined) : Promise<GameQuestionGame | null> {
+    let { data, error } = await supabase
+        .from("games")
+        .select("*, players_games (*), questions_games(*)")
+        .eq('code', code)
+    if (data == null || data == undefined) return null;
+
+    let gameQuestionGame: GameQuestionGame = new GameQuestionGame(data)
+
+    return gameQuestionGame;
+}
+
 export async function getQuestionsGames(gameID: string) {
     let { data, error } = await supabase
         .from("questions_games")
@@ -167,6 +179,7 @@ export async function getRoundPoints(gameID?: string) {
             .from("questions_games ")
             .select("*, players_questions (*,  players_games(place))")
             .eq('isReady', true)
+            .eq('game_id', gameID)
             .order('id', {ascending: false})
             .limit(1)
 
@@ -249,7 +262,7 @@ export async function updateAnsweredCountInQuestionsGames(answeredCount: number,
         .eq('id', gameID)
 }
 
-export async function updatePlayerPoints(playerID:string, points:number | null) {
+export async function updatePlayerPoints(playerID:string, points:number | null = null) {
 
     let {data}:PostgrestResponse<{ points: number }> = await supabase
         .from('players_games')
