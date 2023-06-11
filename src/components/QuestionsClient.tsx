@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { game, player_game, question, questions_games } from '@/types/types'
+import { game, game_player_game, player_game, player_question, question, questions_games } from '@/src/types/types'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from 'axios';
-import supabase from '@/utils/supabase';
+import supabase from '@/src/utils/supabase';
 import { CircularProgress } from '@mui/material';
 import { useRouter } from "next/navigation";
-import { getGame } from '@/utils/databaseFunctions';
+import { getGame, getLastPlayersQuestions, getPlayersQuestions, getPlayersQuestionsByQuestion, updatePlayerPoints } from '@/src/utils/databaseFunctions';
 
 
 function QuestionsClient({question,code,player,playerTurn}:{question:question,code:string,player:string,playerTurn:player_game | undefined}) {
@@ -55,7 +55,7 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
                 {
                     await calculateResults(playerTurn, game);
                     setHasAnswered(false)
-                    router.replace(`/game/${code}/result`);
+                    router.push(`/game/${code}/result`);
                 }
             }
         )
@@ -103,12 +103,41 @@ function QuestionsClient({question,code,player,playerTurn}:{question:question,co
 
 export default QuestionsClient
 
-async function calculateResults(playerTurn: player_game | undefined, game: game | undefined)
+async function calculateResults(playerTurn: player_game | undefined, game: game_player_game | game | undefined)
 {
     // I need to know what player is in turn
-    // With that player I need to know the option selected
-    // Then I need to add 1 for each same response
 
+    // With that player I need to know the option selected
+
+    let playerQuestion:player_question  = await getLastPlayersQuestions(playerTurn?.id ?? '')
+    let option = playerQuestion.option
+    let pointsPlayerTurn = 0
+
+    // Then I need to add 1 for each same response
+    // game?.players_games.forEach((x)=>{
+    //     console.log("player:")
+    //     console.log(x)
+    // })
+
+
+    let playersQuestions:Array<player_question> = await getPlayersQuestionsByQuestion(playerQuestion.question)
+
+    playersQuestions.forEach(async (pQuestion) => {
+        console.log(pQuestion)
+        // if (playerQuestion.id == playerQuestion.id) {
+        //     return
+        // }
+
+        if (pQuestion.option == option) {
+            console.log("should update points")
+            pointsPlayerTurn++;
+            await updatePlayerPoints(pQuestion.player)
+        }
+    })
+
+    await updatePlayerPoints(playerQuestion.player,pointsPlayerTurn)
+
+    
     // eg: 
     /*
         turn: player1

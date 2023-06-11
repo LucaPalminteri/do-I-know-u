@@ -1,8 +1,8 @@
-import Questions from "@/components/Questions";
-import WaitConfirmation from "@/components/WaitConfirmation";
-import { getTokenInfo } from "@/utils/Functions";
-import { getPlayers, getRoundPoints, getStartedGame } from "@/utils/databaseFunctions";
-import supabase from "@/utils/supabase";
+import Questions from "@/src/components/Questions";
+import WaitConfirmation from "@/src/components/WaitConfirmation";
+import { getTokenInfo } from "@/src/utils/Functions";
+import { getPlayers, getRoundPoints, getStartedGame } from "@/src/utils/databaseFunctions";
+import supabase from "@/src/utils/supabase";
 
 async function Code() {
     let { code } = getTokenInfo()

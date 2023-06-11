@@ -1,13 +1,13 @@
 import React, { use } from "react";
-import ShareButton from "@/components/ShareButton";
-import supabase from "@/utils/supabase";
-import LeaveGameButton from "@/components/LeaveGameButton";
+import ShareButton from "@/src/components/ShareButton";
+import supabase from "@/src/utils/supabase";
+import LeaveGameButton from "@/src/components/LeaveGameButton";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-import CopyCode from "@/components/CopyCode";
-import UserList from "@/components/UserList";
-import HomeLink from "@/components/HomeLink";
-import AsideMobile from "@/components/AsideMobile";
+import CopyCode from "@/src/components/CopyCode";
+import UserList from "@/src/components/UserList";
+import HomeLink from "@/src/components/HomeLink";
+import AsideMobile from "@/src/components/AsideMobile";
 
 async function getInfo(code: string) {
     try {

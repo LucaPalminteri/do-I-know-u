@@ -1,5 +1,6 @@
-import { GameQuestionGame } from "@/classes/GameQuestionGame";
-import { player_question } from "@/types/types";
+import { GameQuestionGame } from "@/src/classes/GameQuestionGame";
+import { player_question } from "@/src/types/types";
+import { PostgrestResponse } from "@supabase/supabase-js";
 import supabase from "./supabase";
 
 // GET Functions
@@ -74,12 +75,36 @@ export async function getPlayersQuestions(playerID: string) {
     return data;
 }
 
+export async function getLastPlayersQuestions(playerID: string) {
+    let { data } = await supabase
+        .from('players_questions')
+        .select()
+        .eq('player', playerID)
+        .limit(1)
+        .order('question', {ascending: false})
+
+    if (data == null || data == undefined) return [];
+
+    return data[0];
+}
+
 export async function getPlayersQuestionsByQuestionAndPlayer(questionID: number, playerID: string) {
     let { data, error } = await supabase
         .from("players_questions")
         .select("*, questions_games(*)")
         .eq('question', questionID)
         .eq('player', playerID)
+
+    if (data == null || data == undefined) return [];
+
+    return data;
+}
+
+export async function getPlayersQuestionsByQuestion(questionID: number) {
+    let { data, error } = await supabase
+        .from("players_questions")
+        .select("*, questions_games(*)")
+        .eq('question', questionID)
 
     if (data == null || data == undefined) return [];
 
@@ -113,6 +138,18 @@ export async function getGameAndPlayerGame(code: string, player: string) {
     return gameQuestionGame;
 }
 
+export async function getPlayersGames(code: string | undefined) : Promise<GameQuestionGame | null> {
+    let { data, error } = await supabase
+        .from("games")
+        .select("*, players_games (*), questions_games(*)")
+        .eq('code', code)
+    if (data == null || data == undefined) return null;
+
+    let gameQuestionGame: GameQuestionGame = new GameQuestionGame(data)
+
+    return gameQuestionGame;
+}
+
 export async function getQuestionsGames(gameID: string) {
     let { data, error } = await supabase
         .from("questions_games")
@@ -142,6 +179,7 @@ export async function getRoundPoints(gameID?: string) {
             .from("questions_games ")
             .select("*, players_questions (*,  players_games(place))")
             .eq('isReady', true)
+            .eq('game_id', gameID)
             .order('id', {ascending: false})
             .limit(1)
 
@@ -222,6 +260,21 @@ export async function updateAnsweredCountInQuestionsGames(answeredCount: number,
         .from('questions_games')
         .update({ answered_count: answeredCount })
         .eq('id', gameID)
+}
+
+export async function updatePlayerPoints(playerID:string, points:number | null = null) {
+
+    let {data}:PostgrestResponse<{ points: number }> = await supabase
+        .from('players_games')
+        .select('points')
+        .eq('id', playerID)
+
+    if(data == null) return
+
+    await supabase
+        .from('players_games')
+        .update({ points: points == null ? data[0].points + 1 : points})
+        .eq('id', playerID)
 }
 
 // DELETE Functions

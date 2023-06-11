@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeLink from '@/components/HomeLink';
+import HomeLink from '@/src/components/HomeLink';
 
 function Information() {
     return (

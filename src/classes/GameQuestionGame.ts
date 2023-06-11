@@ -1,4 +1,4 @@
-import { class_game_question_game, player_game, questions_games } from "@/types/types";
+import { class_game_question_game, player_game, questions_games } from "@/src/types/types";
 export class GameQuestionGame {
     id: string;
     created_at: string;

@@ -1,9 +1,9 @@
 'use client'
 import React, { useState } from 'react'
-import { player_game } from "@/types/types";
+import { player_game } from "@/src/types/types";
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
-import supabase from '@/utils/supabase';
+import supabase from '@/src/utils/supabase';
 import HourglassEmptyRoundedIcon from '@mui/icons-material/HourglassEmptyRounded';
 
 function UserList({ players_games, username: player }: { players_games: Array<player_game>, username: string }) {

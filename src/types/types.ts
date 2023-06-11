@@ -3,7 +3,8 @@ export type game = {
     created_at: string,
     players_count: number,
     code: string,
-    player_ready: number
+    player_ready: number,
+    hasStarted:boolean
 }
 
 export type player_game = {

@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import supabase from '@/utils/supabase'
-import { iQuestion } from '@/types/types'
+import supabase from '@/src/utils/supabase'
+import { iQuestion } from '@/src/types/types'
 
 
 function Insert() {

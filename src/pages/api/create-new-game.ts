@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createToken } from "@/utils/token";
-import { player_game, questions_games } from "@/types/types";
-import { getRandomCode, insertGame, insertPlayerGame, insertQuestionGame } from "@/utils/databaseFunctions";
-import { QuestionGame } from "@/classes/QuestionGame";
+import { createToken } from "@/src/utils/token";
+import { player_game, questions_games } from "@/src/types/types";
+import { getRandomCode, insertGame, insertPlayerGame, insertQuestionGame } from "@/src/utils/databaseFunctions";
+import { QuestionGame } from "@/src/classes/QuestionGame";
 
 export default async function createNewGame(req: NextApiRequest, res: NextApiResponse<Object | null>) {
     let code: string = getRandomCode();
